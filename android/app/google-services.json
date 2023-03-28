@@ -1,0 +1,92 @@
+{
+  "project_info": {
+    "project_number": "786693006478",
+    "project_id": "pitchbox-9db19",
+    "storage_bucket": "pitchbox-9db19.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:786693006478:android:6a5a1e744a93590c8f55df",
+        "android_client_info": {
+          "package_name": "com.example.pitchbox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "786693006478-8l4remd2n38vi3fsq369vj8u0u5a55b8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pitchbox",
+            "certificate_hash": "50bf42ca49c5081848a70ae8b071704c27a6c0b2"
+          }
+        },
+        {
+          "client_id": "786693006478-9i7f813n4p43v78ipvsm358ejgnra661.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDchxX1neWvHAEDTyP4CHhIYWk9Ix1rQIc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "786693006478-9i7f813n4p43v78ipvsm358ejgnra661.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "786693006478-gomauh0suvgeet25aoc6qq80t0hh88at.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.pitchbox",
+                "app_store_id": "123456789"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:786693006478:android:2817b9b8de78dae08f55df",
+        "android_client_info": {
+          "package_name": "com.example.pitchboxadmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "786693006478-9i7f813n4p43v78ipvsm358ejgnra661.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDchxX1neWvHAEDTyP4CHhIYWk9Ix1rQIc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "786693006478-9i7f813n4p43v78ipvsm358ejgnra661.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "786693006478-gomauh0suvgeet25aoc6qq80t0hh88at.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.pitchbox",
+                "app_store_id": "123456789"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
