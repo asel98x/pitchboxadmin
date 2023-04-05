@@ -3,10 +3,10 @@ import 'dart:ui';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:pitchboxadmin/appcolors.dart';
-import 'package:pitchboxadmin/layouts/loan.dart';
-import 'package:pitchboxadmin/layouts/profile.dart';
-import 'package:pitchboxadmin/layouts/startups.dart';
-import 'package:pitchboxadmin/layouts/users.dart';
+import 'package:pitchboxadmin/layouts/loan/loan.dart';
+import 'package:pitchboxadmin/layouts/profile/profile.dart';
+import 'package:pitchboxadmin/layouts/startups/Business.dart';
+import 'package:pitchboxadmin/layouts/users/users.dart';
 
 class Dashboard extends StatefulWidget{
   @override
@@ -18,7 +18,7 @@ class _DashboardState extends State<Dashboard> {
   int _currentIndex = 0;
   late PageController _pageController;
 
-  final List<Widget> _pages = [    StarPage(),    LoanPage(),    UserPage(),    ProfilePage(),  ];
+  final List<Widget> _pages = [    BusinessPage(),    LoanPage(),    UserPage(),    ProfilePage(),  ];
 
   @override
   void initState(){
@@ -36,22 +36,14 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-        body: Navigator(
-          onGenerateRoute: (settings) {
-            return MaterialPageRoute(
-              builder: (context) {
-                return _pages[_currentIndex];
-              },
-            );
+      body: _pages[_currentIndex],
+      bottomNavigationBar: BottomNavyBar(
+          selectedIndex: _currentIndex,
+          onItemSelected:(index){
+            setState(() {
+              _currentIndex = index;
+            });
           },
-        ),
-        bottomNavigationBar: BottomNavyBar(
-            selectedIndex: _currentIndex,
-            onItemSelected:(index){
-              setState(() {
-                _currentIndex = index;
-              });
-            },
             items: <BottomNavyBarItem>[
               BottomNavyBarItem(
                   title: Text("Startups",

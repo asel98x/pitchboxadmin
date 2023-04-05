@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class UserPage extends StatelessWidget {
+class EntrepreneurTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Center(
-        child: Text('User Page'),
+        child: Text('Entrepreneur Tab12'),
       ),
     );
   }

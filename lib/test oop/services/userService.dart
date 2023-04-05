@@ -5,8 +5,7 @@ import 'package:pitchboxadmin/test oop/model/user.dart';
 import 'package:pitchboxadmin/test oop/utility/userServiceInterface.dart';
 
 class UserService implements UserServiceInterface {
-  final CollectionReference usersCollection =
-  FirebaseFirestore.instance.collection('testUsers');
+  final CollectionReference usersCollection = FirebaseFirestore.instance.collection('testUsers');
 
   @override
   Future<DocumentReference> addUser(User user) {

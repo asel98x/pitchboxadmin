@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class StarPage extends StatelessWidget {
+class AdminTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Center(
-        child: Text('startups Page'),
+        child: Text('Admin Tab'),
       ),
     );
   }

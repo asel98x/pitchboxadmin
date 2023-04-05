@@ -6,6 +6,8 @@ import 'package:pitchboxadmin/layouts/dashboard.dart';
 import 'package:pitchboxadmin/layouts/loginScreen.dart';
 import 'package:pitchboxadmin/test/grid/myHomePage.dart';
 import 'package:pitchboxadmin/test/multi%20Step%20Form/multiStepForm.dart';
+import 'package:pitchboxadmin/test/stepper/MyStepper.dart';
+import 'package:pitchboxadmin/test/stepper2/CheckoutForm.dart';
 
 import 'test oop/layers/addUserScreen.dart';
 
@@ -29,10 +31,7 @@ Future main() async{
     await Firebase.initializeApp();
   }
 
-  runApp( DevicePreview(
-    enabled: !kReleaseMode,
-    builder: (context) => MyApp(), // Wrap your app
-  ),);
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -43,14 +42,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      useInheritedMediaQuery: true,
-      locale: DevicePreview.locale(context),
-      builder: DevicePreview.appBuilder,
       title: 'PITCHBOX Admin Panel',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: Scaffold(
+        body: LoginScreen(),
+      ),
     );
   }
 }
