@@ -23,12 +23,19 @@ class IndustryService implements IndustryInterface {
     return industries;
   }
 
-  @override
-  Future<Industry> getIndustry(String industryId) async {
-    DocumentSnapshot doc =
-    await _firestore.collection('industries').doc(industryId).get();
-    return Industry.fromSnapshot(doc);
+  Future<List<Industry>> getIndustry(String industryName) async {
+    QuerySnapshot querySnapshot = await _firestore
+        .collection('industries')
+        .where('name', isEqualTo: industryName)
+        .get();
+    List<Industry> industries = [];
+    querySnapshot.docs.forEach((doc) {
+      industries.add(Industry.fromSnapshot(doc));
+    });
+    return industries;
   }
+
+
 
   @override
   Future<void> updateIndustry(Industry industry) async {

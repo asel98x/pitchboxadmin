@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:pitchboxadmin/appcolors.dart';
 import 'package:pitchboxadmin/backend/controller/IndustryController.dart';
 import 'package:pitchboxadmin/backend/model/industry.dart';
 import 'package:pitchboxadmin/layouts/startups/add/AddBusinessPage.dart';
@@ -69,7 +71,7 @@ class _BusinessPageState extends State<BusinessPage> with SingleTickerProviderSt
                         ),
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Please enter Country';
+                            return 'Please enter Industry name';
                           }
                           return null;
                         },
@@ -147,40 +149,53 @@ class _BusinessPageState extends State<BusinessPage> with SingleTickerProviderSt
 
   @override
   Widget build(BuildContext context) {
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Tab ${controller.index + 1}'),
-        centerTitle: true,
-        backgroundColor: Color(0xff005BE0),
-        bottom: TabBar(
-          controller: controller,
-          tabs: [
-            Tab(text: 'startup'),
-            Tab(text: 'Industry'),
-          ],
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: AppColors.blueDarkColor, // Set status bar color
+    ));
+    return DefaultTabController(
+      length: 2,
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text('P I T C H B O X'),
+            backgroundColor: AppColors.mainBlueColor,// Set the background color of the AppBar
+            bottom: TabBar(
+              controller: controller,
+              tabs: [
+                Tab(text: 'Startup'),
+                Tab(text: 'Industry'),
+              ],
+            ),
+          ),
+          body: Column(
+            children: [
+              Expanded(
+                child: TabBarView(
+                  controller: controller,
+                  children: [
+                    StartupTab(),
+                    IndustryTab(),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: AppColors.mainBlueColor,
+            child: Icon(Icons.add, size: 32),
+            onPressed: () {
+              if (controller.index == 0) {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => AddBusinessPage()),
+                );
+              } else if (controller.index == 1) {
+                _showAddDialog(context);
+              }
+            },
+          ),
         ),
       ),
-      body: TabBarView(
-        controller: controller,
-        children: [
-          StartupTab(),
-          IndustryTab()
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add, size: 32,),
-        onPressed: (){
-          if (controller.index == 0) {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddBusinessPage()));
-          } else if (controller.index == 1) {
-            _showAddDialog(context);
-          }
-        },
-      ),
-
     );
-
   }
 
-}
+  }
