@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:pitchboxadmin/layouts/dashboard.dart';
 import 'package:pitchboxadmin/layouts/loginScreen.dart';
+import 'package:pitchboxadmin/test login & signup/screen/login_screen.dart';
+import 'package:pitchboxadmin/test login & signup/screen/testReg.dart';
 import 'package:pitchboxadmin/test/grid/myHomePage.dart';
 import 'package:pitchboxadmin/test/multi%20Step%20Form/multiStepForm.dart';
 import 'package:pitchboxadmin/test/stepper/MyStepper.dart';

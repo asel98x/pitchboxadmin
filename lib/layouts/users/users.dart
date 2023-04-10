@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pitchboxadmin/appcolors.dart';
@@ -19,8 +22,10 @@ class UserPage extends StatefulWidget {
 
 class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin{
   final _formKey = GlobalKey<FormState>();
+  final _auth = FirebaseAuth.instance;
   late TabController controller;
   final _userService = UserService();
+  String? errorMessage;
 
   bool _obscureText = true;
   final _nameController = TextEditingController();
@@ -30,54 +35,72 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
 
 
 
-  void _addValue() async {
-    late String userName= _nameController.text;
-    late String userEmail= _emailController.text;
-    late String userPassword= _confirmPasswordController.text;
-    try{
-      if (controller.index == 0) {
-        await _userService.addEntrepreneur(
-            MainUser(
-                userId: '',
-                userName: userName,
-                userEmail: userEmail,
-                userPassword: userPassword
 
-            ));
-      }else if (controller.index == 1) {
-        await _userService.addInvestor(
-            MainUser(
-                userId: '',
-                userName: userName,
-                userEmail: userEmail,
-                userPassword: userPassword
+  void userRegister(String email, String password) async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        await await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(email: email, password: password)
+            .then((value) => {postDetailsToFirestore()})
+            .catchError((e) async {
+          Fluttertoast.showToast(msg: e!.message);
 
-            ));
-      }else if (controller.index == 2) {
-       await _userService.addAdmin(
-           MainUser(
-               userId: '',
-               userName: userName,
-               userEmail: userEmail,
-               userPassword: userPassword
-
-           ));
-     }
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('User added successfully!'),
-        ),
-      );
-
-    }catch(e){
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Failed to add user'),
-        ),
-      );
-      print(e.toString());
+          UserCredential userCredential = await FirebaseAuth.instance
+              .createUserWithEmailAndPassword(email: email, password: password);
+          User? user = userCredential.user;
+          print(user);
+        });
+      } on FirebaseAuthException catch (error) {
+        if (error.code == 'weak-password') {
+          print('The password provided is too weak.');
+        } else if (error.code == 'email-already-in-use') {
+          print('The account already exists for that email.');
+        }
+        switch (error.code) {
+          case "invalid-email":
+            errorMessage = "Your email address appears to be malformed.";
+            break;
+          case "wrong-password":
+            errorMessage = "Your password is wrong.";
+            break;
+          case "user-not-found":
+            errorMessage = "User with this email doesn't exist.";
+            break;
+          case "user-disabled":
+            errorMessage = "User with this email has been disabled.";
+            break;
+          case "too-many-requests":
+            errorMessage = "Too many requests";
+            break;
+          case "operation-not-allowed":
+            errorMessage = "Signing in with Email and Password is not enabled.";
+            break;
+          default:
+            errorMessage = "An undefined Error happened.";
+        }
+        Fluttertoast.showToast(msg: errorMessage!);
+        print(error.code);
+      }
     }
   }
+  postDetailsToFirestore() async {
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    User? user = _auth.currentUser;
+
+    MainUser userModel = MainUser(
+        userId: user!.uid, // Use user.uid instead of user.userId
+        userName: _nameController.text,
+        userEmail: _emailController.text,
+        userPassword: _confirmPasswordController.text);
+
+    await firebaseFirestore
+        .collection("Admin")
+        .doc(user.uid) // Use user.uid here as well
+        .set(userModel.toMap());
+    Fluttertoast.showToast(msg: "Account created successfully :) ");
+
+  }
+
 
   @override
   void initState(){
@@ -120,10 +143,17 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
                           borderSide: BorderSide(),
                         ),),
                         validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your name';
+                          RegExp regex = new RegExp(r'^.{3,}$');
+                          if (value!.isEmpty) {
+                            return ("Name cannot be Empty");
+                          }
+                          if (!regex.hasMatch(value)) {
+                            return ("Enter Valid name(Min. 3 Character)");
                           }
                           return null;
+                        },
+                        onSaved: (value) {
+                          _nameController.text = value!;
                         },
                       ),
                       const SizedBox(height: 16),
@@ -145,6 +175,9 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
                             return 'Please enter a valid email address';
                           }
                           return null;
+                        },
+                        onSaved: (value) {
+                          _emailController.text = value!;
                         },
                       ),
 
@@ -213,7 +246,7 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
                   ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        _addValue();
+                        userRegister(_emailController.text, _confirmPasswordController.text);
                         Navigator.of(context).pop();
                       }
                     },
