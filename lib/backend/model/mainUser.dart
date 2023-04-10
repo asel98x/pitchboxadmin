@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MainUser {
   String userId;
-  final String userName;
+  String userName;
   final String userEmail;
   final String userPassword;
 

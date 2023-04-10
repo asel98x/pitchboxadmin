@@ -83,4 +83,8 @@ class IndustryController {
   Future<void> deleteIndustry(String industryId) async {
     await _industryService.deleteIndustry(industryId);
   }
+
+  Future<List<String>> getIndustryNames() async {
+    return await _industryService.getIndustryNames();
+  }
 }

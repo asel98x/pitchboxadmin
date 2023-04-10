@@ -1,4 +1,4 @@
-import 'dart:ui';
+
 
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +36,7 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
+      backgroundColor: Colors.grey[200],
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomNavyBar(
           selectedIndex: _currentIndex,
