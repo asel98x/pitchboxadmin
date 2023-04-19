@@ -4,17 +4,16 @@ import 'package:pitchboxadmin/backend/utility/businessInterface.dart';
 
 class BusinessService implements BusinessInterface{
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final CollectionReference usersCollection = FirebaseFirestore.instance.collection('startup');
+  final CollectionReference usersCollection = FirebaseFirestore.instance.collection('Entrepreneur');
 
   @override
   Future<DocumentReference> addNewBusiness(Business business) async{
     final docRef = usersCollection.doc();
 
-
     await docRef.set({
       'id': docRef.id,
-      'businessId': business.businessId,
-      'userId': business.userId,
+      'name': business.businessId,
+      'name': business.userId,
       'name': business.name,
       'mobile': business.mobile,
       'city': business.city,
@@ -30,8 +29,7 @@ class BusinessService implements BusinessInterface{
       'facebook': business.facebook,
       'twitter': business.twitter,
       'instagram': business.instagram,
-      'Userwebsite': business.Userwebsite,
-      'UserImgUrl': business.UserImgUrl,
+      'website': business.website,
 
       'businessName': business.businessName,
       'businessIndustry': business.businessIndustry,
@@ -43,7 +41,6 @@ class BusinessService implements BusinessInterface{
       'productOrServiceOffering': business.productOrServiceOffering,
       'fundingNeeds': business.fundingNeeds,
       'website': business.website,
-      'businessImgUrl': business.businessImgUrl,
 
       'fundAmount': business.fundAmount,
       'fundPurpose': business.fundPurpose,
@@ -58,7 +55,6 @@ class BusinessService implements BusinessInterface{
       'investorLocation': business.investorLocation,
       'investmentStage': business.investmentStage,
       'industryFocus': business.industryFocus,
-      'status': business.status,
     });
     return docRef;
   }
@@ -76,19 +72,18 @@ class BusinessService implements BusinessInterface{
         mobile: doc['mobile'],
         city: doc['city'],
         country: doc['country'],
-        professionalExperience: (doc['professionalExperience'] as List<dynamic>).cast<String>(),
-        entrepreneurshipExperience:(doc['entrepreneurshipExperience'] as List<dynamic>).cast<String>(),
-        education: (doc['education'] as List<dynamic>).cast<String>(),
-        industryCertifications:(doc['industryCertifications'] as List<dynamic>).cast<String>(),
-        awardsAchievements: (doc['awardsAchievements'] as List<dynamic>).cast<String>(),
-        trackRecord: (doc['trackRecord'] as List<dynamic>).cast<String>(),
+        professionalExperience:doc['professionalExperience'],
+        entrepreneurshipExperience:doc['entrepreneurshipExperience'],
+        education: doc['education'],
+        industryCertifications:doc['industryCertifications'],
+        awardsAchievements: doc['awardsAchievements'],
+        trackRecord: doc['trackRecord'],
         email: doc['email'],
         linkedin: doc['linkedin'],
         twitter: doc['twitter'],
         facebook: doc['facebook'],
         instagram: doc['instagram'],
         Userwebsite: doc['Userwebsite'],
-        UserImgUrl: doc['UserImgUrl'],
         businessIndustry: doc['businessIndustry'],
         businessName: doc['businessName'],
         businessLocation: doc['businessLocation'],
@@ -99,7 +94,6 @@ class BusinessService implements BusinessInterface{
         valueProposition: doc['valueProposition'],
         productOrServiceOffering: doc['productOrServiceOffering'],
         fundingNeeds: doc['fundingNeeds'],
-        businessImgUrl: doc['businessImgUrl'],
         fundAmount: doc['fundAmount'],
         fundPurpose: doc['fundPurpose'],
         timeline: doc['timeline'],
@@ -110,49 +104,12 @@ class BusinessService implements BusinessInterface{
         minimumInvestmentAmount: doc['minimumInvestmentAmount'],
         maximumInvestmentAmount: doc['maximumInvestmentAmount'],
         investmentStage: doc['investmentStage'],
-        industryFocus: (doc['industryFocus'] as List<dynamic>).cast<String>(),
+        industryFocus: doc['industryFocus'],
         investorLocation: doc['investorLocation'],
-        status: doc['status'],
       );
       newBusinesses.add(business);
     });
 
     return newBusinesses;
-  }
-
-  @override
-  Future<List<Business>> getNewBusiness(String businessName) async{
-    QuerySnapshot querySnapshot = await _firestore
-        .collection('startup')
-        .where('businessName', isEqualTo: businessName)
-        .get();
-    List<Business> business = [];
-    querySnapshot.docs.forEach((doc) {
-      business.add(Business.fromSnapshot(doc));
-    });
-    return business;
-  }
-
-  @override
-  Future<List<String>> getNewBusinessNames() async{
-    QuerySnapshot querySnapshot = await _firestore.collection('startup').get();
-    List<String> businessNames = [];
-    querySnapshot.docs.forEach((doc) {
-      businessNames.add(doc.get('businessName'));
-    });
-    return businessNames;
-  }
-
-  @override
-  Future<void> deleteNewBusiness(String businessId) async{
-    await _firestore.collection('startup').doc(businessId).delete();
-  }
-
-  @override
-  Future<void> updateNewBusiness(Business business) async{
-    await _firestore
-        .collection('industries')
-        .doc(business.id)
-        .update(business.toMap());
   }
 }

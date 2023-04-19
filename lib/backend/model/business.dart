@@ -20,7 +20,10 @@ class Business {
   String facebook;
   String instagram;
   String Userwebsite;
+<<<<<<< HEAD
   String UserImgUrl;
+=======
+>>>>>>> origin/main
 
   String businessIndustry;
   String businessName;
@@ -32,7 +35,10 @@ class Business {
   String valueProposition;
   String productOrServiceOffering;
   String fundingNeeds;
+<<<<<<< HEAD
   String businessImgUrl;
+=======
+>>>>>>> origin/main
 
   String fundAmount;
   String fundPurpose;
@@ -48,8 +54,11 @@ class Business {
   List<String> industryFocus;
   String investorLocation;
 
+<<<<<<< HEAD
   String status;
 
+=======
+>>>>>>> origin/main
   Business({
     required this.id,
     required this.businessId,
@@ -70,7 +79,10 @@ class Business {
     required this.facebook,
     required this.instagram,
     required this.Userwebsite,
+<<<<<<< HEAD
     required this.UserImgUrl,
+=======
+>>>>>>> origin/main
     required this.businessIndustry,
     required this.businessName,
     required this.businessLocation,
@@ -81,7 +93,10 @@ class Business {
     required this.valueProposition,
     required this.productOrServiceOffering,
     required this.fundingNeeds,
+<<<<<<< HEAD
     required this.businessImgUrl,
+=======
+>>>>>>> origin/main
     required this.fundAmount,
     required this.fundPurpose,
     required this.timeline,
@@ -94,7 +109,10 @@ class Business {
     required this.investmentStage,
     required this.industryFocus,
     required this.investorLocation,
+<<<<<<< HEAD
     required this.status,
+=======
+>>>>>>> origin/main
   });
 
   factory Business.fromSnapshot(DocumentSnapshot snapshot) {
@@ -121,7 +139,10 @@ class Business {
         facebook: snapshot['facebook'],
         instagram: snapshot['instagram'],
         Userwebsite: snapshot['Userwebsite'],
+<<<<<<< HEAD
         UserImgUrl: snapshot['UserImgUrl'],
+=======
+>>>>>>> origin/main
         businessIndustry: snapshot['businessIndustry'],
         businessName: snapshot['businessName'],
         businessLocation: snapshot['businessLocation'],
@@ -132,7 +153,10 @@ class Business {
         valueProposition: snapshot['valueProposition'],
         productOrServiceOffering: snapshot['productOrServiceOffering'],
         fundingNeeds: snapshot['fundingNeeds'],
+<<<<<<< HEAD
         businessImgUrl: snapshot['businessImgUrl'],
+=======
+>>>>>>> origin/main
         fundAmount: snapshot['fundAmount'],
         fundPurpose: snapshot['fundPurpose'],
         timeline: snapshot['timeline'],
@@ -144,8 +168,12 @@ class Business {
         maximumInvestmentAmount: snapshot['maximumInvestmentAmount'],
         investmentStage: snapshot['investmentStage'],
         industryFocus: snapshot['industryFocus'].cast<String>(),
+<<<<<<< HEAD
         investorLocation: snapshot['investorLocation'],
         status: snapshot['status']);
+=======
+        investorLocation: snapshot['investorLocation']);
+>>>>>>> origin/main
   }
 
   Map<String, dynamic> toMap() {
@@ -168,7 +196,10 @@ class Business {
       'facebook': facebook,
       'instagram': instagram,
       'Userwebsite': Userwebsite,
+<<<<<<< HEAD
       'UserImgUrl': UserImgUrl,
+=======
+>>>>>>> origin/main
       'businessIndustry': businessIndustry,
       'businessName': businessName,
       'businessLocation': businessLocation,
@@ -179,7 +210,10 @@ class Business {
       'valueProposition': valueProposition,
       'productOrServiceOffering': productOrServiceOffering,
       'fundingNeeds': fundingNeeds,
+<<<<<<< HEAD
       'businessImgUrl': businessImgUrl,
+=======
+>>>>>>> origin/main
       'fundAmount': fundAmount,
       'fundPurpose': fundPurpose,
       'timeline': timeline,
@@ -192,7 +226,10 @@ class Business {
       'investmentStage': investmentStage,
       'industryFocus': industryFocus,
       'investorLocation': investorLocation,
+<<<<<<< HEAD
       'status': status,
+=======
+>>>>>>> origin/main
     };
   }
 }

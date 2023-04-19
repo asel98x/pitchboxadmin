@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+=======
+>>>>>>> origin/main
 import 'package:pitchboxadmin/backend/model/business.dart';
 import 'package:pitchboxadmin/backend/services/businessService.dart';
 
@@ -27,8 +30,13 @@ class BusinessController {
     required String facebook,
     required String instagram,
     required String Userwebsite,
+<<<<<<< HEAD
     required File UserImgUrl,
     required String provider,
+=======
+    required String provider,
+    required String imgUrl,
+>>>>>>> origin/main
     required String pass,
     required List<String> professionalExperience,
     required List<String> entrepreneurshipExperience,
@@ -46,7 +54,10 @@ class BusinessController {
     required String valueProposition,
     required String productOrServiceOffering,
     required String fundingNeeds,
+<<<<<<< HEAD
     required File businessImgUrl,
+=======
+>>>>>>> origin/main
     required String fundAmount,
     required String fundPurpose,
     required String timeline,
@@ -61,6 +72,7 @@ class BusinessController {
     required String investorLocation,
     required String investmentGoal,
     required String investmentCriteria,
+<<<<<<< HEAD
     required String status,
   }) async {
 
@@ -81,6 +93,9 @@ class BusinessController {
 
 
 
+=======
+  }) async {
+>>>>>>> origin/main
     final business = Business(
       id: '',
       userId: userId ,
@@ -94,7 +109,10 @@ class BusinessController {
       facebook: facebook,
       instagram: instagram,
       Userwebsite: Userwebsite,
+<<<<<<< HEAD
       UserImgUrl: userImageDownloadUrl,
+=======
+>>>>>>> origin/main
       professionalExperience: professionalExperience,
       entrepreneurshipExperience: entrepreneurshipExperience,
       education: education,
@@ -113,7 +131,10 @@ class BusinessController {
       valueProposition: valueProposition,
       productOrServiceOffering: productOrServiceOffering,
       fundingNeeds: fundingNeeds,
+<<<<<<< HEAD
       businessImgUrl: businessImageDownloadUrl,
+=======
+>>>>>>> origin/main
 
       fundAmount: fundAmount,
       fundPurpose: fundPurpose,
@@ -128,7 +149,10 @@ class BusinessController {
       investmentStage: investmentStage,
       industryFocus: industryFocus,
       investorLocation: investorLocation,
+<<<<<<< HEAD
       status: status,
+=======
+>>>>>>> origin/main
     );
 
 
@@ -136,11 +160,16 @@ class BusinessController {
     await _BusinessService.addNewBusiness(business);
   }
 
+<<<<<<< HEAD
   Future<List<Business>> getNewBusinessesList() async {
+=======
+  Future<List<Business>> getNewBusinesses() async {
+>>>>>>> origin/main
     List<Business> newBusinesses =
     await _BusinessService.getNewBusinessesList();
     return newBusinesses;
   }
+<<<<<<< HEAD
 
   Future<List<Business>> getNewBusiness(String businessName) async {
     return await _BusinessService.getNewBusiness(businessName);
@@ -323,4 +352,6 @@ class BusinessController {
   Future<void> deleteNewBusiness(String businessId) async {
     await _BusinessService.deleteNewBusiness(businessId);
   }
+=======
+>>>>>>> origin/main
 }

@@ -97,7 +97,7 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
         .collection("Admin")
         .doc(user.uid) // Use user.uid here as well
         .set(userModel.toMap());
-    Fluttertoast.showToast(msg: "Account created successfully");
+    Fluttertoast.showToast(msg: "Account created successfully :) ");
 
   }
 
