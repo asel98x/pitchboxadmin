@@ -166,6 +166,30 @@ class UserService implements UserInterface {
     await _firestore.collection('investor').doc(userId).delete();
   }
 
+  @override
+  Future<void> updateAdmin(MainUser mainUser) async{
+    await _firestore
+        .collection('Admin')
+        .doc(mainUser.userId)
+        .update(mainUser.toMap());
+  }
+
+  @override
+  Future<void> updateEntrepreneur(MainUser mainUser) async{
+    await _firestore
+        .collection('Entrepreneur')
+        .doc(mainUser.userId)
+        .update(mainUser.toMap());
+  }
+
+  @override
+  Future<void> updateInvestor(MainUser mainUser) async{
+    await _firestore
+        .collection('investor')
+        .doc(mainUser.userId)
+        .update(mainUser.toMap());
+  }
+
   
 
 }

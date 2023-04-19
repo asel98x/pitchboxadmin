@@ -6,6 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pitchboxadmin/appcolors.dart';
+import 'package:pitchboxadmin/backend/controller/userController.dart';
 import 'package:pitchboxadmin/backend/model/mainUser.dart';
 import 'package:pitchboxadmin/backend/services/userService.dart';
 import 'package:pitchboxadmin/layouts/loginScreen.dart';
@@ -25,9 +26,11 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
   final _auth = FirebaseAuth.instance;
   late TabController controller;
   final _userService = UserService();
+  final _userController = UserController();
   String? errorMessage;
 
   bool _obscureText = true;
+  final _idController = TextEditingController();
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -93,11 +96,28 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
         userEmail: _emailController.text,
         userPassword: _confirmPasswordController.text);
 
-    await firebaseFirestore
-        .collection("Admin")
-        .doc(user.uid) // Use user.uid here as well
-        .set(userModel.toMap());
-    Fluttertoast.showToast(msg: "Account created successfully :) ");
+    if (controller.index == 0) {
+      await firebaseFirestore
+          .collection("Entrepreneur")
+          .doc(user.uid) // Use user.uid here as well
+          .set(userModel.toMap());
+      Fluttertoast.showToast(msg: "Entrepreneur Account created successfully");
+    } else if (controller.index == 1) {
+      await firebaseFirestore
+          .collection("investor")
+          .doc(user.uid) // Use user.uid here as well
+          .set(userModel.toMap());
+      Fluttertoast.showToast(msg: "Investor Account created successfully");
+    }
+    else if (controller.index == 2) {
+      await firebaseFirestore
+          .collection("Admin")
+          .doc(user.uid) // Use user.uid here as well
+          .set(userModel.toMap());
+      Fluttertoast.showToast(msg: "Admin Account created successfully");
+    }
+
+
 
   }
 

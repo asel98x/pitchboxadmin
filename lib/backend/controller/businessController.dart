@@ -1,10 +1,7 @@
-<<<<<<< HEAD
 import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-=======
->>>>>>> origin/main
 import 'package:pitchboxadmin/backend/model/business.dart';
 import 'package:pitchboxadmin/backend/services/businessService.dart';
 
@@ -14,6 +11,7 @@ class BusinessController {
   List<Map<String, dynamic>> get newBusinesses => _newBusinesses;
 
   Future<void> addNewBusiness({
+    required String id,
     required String businessId,
     required String userId,
     required String name,
@@ -30,13 +28,8 @@ class BusinessController {
     required String facebook,
     required String instagram,
     required String Userwebsite,
-<<<<<<< HEAD
     required File UserImgUrl,
     required String provider,
-=======
-    required String provider,
-    required String imgUrl,
->>>>>>> origin/main
     required String pass,
     required List<String> professionalExperience,
     required List<String> entrepreneurshipExperience,
@@ -54,10 +47,7 @@ class BusinessController {
     required String valueProposition,
     required String productOrServiceOffering,
     required String fundingNeeds,
-<<<<<<< HEAD
     required File businessImgUrl,
-=======
->>>>>>> origin/main
     required String fundAmount,
     required String fundPurpose,
     required String timeline,
@@ -72,20 +62,19 @@ class BusinessController {
     required String investorLocation,
     required String investmentGoal,
     required String investmentCriteria,
-<<<<<<< HEAD
     required String status,
   }) async {
 
     // Upload user image to Firebase Storage
     final userImageRef = FirebaseStorage.instance
-        .ref('user_images/$userId/${UserImgUrl.path.split('/').last}');
+        .ref('user_images/${DateTime.now().millisecondsSinceEpoch}');
     final userImageUploadTask = userImageRef.putFile(UserImgUrl);
     final userImageSnapshot = await userImageUploadTask;
     final userImageDownloadUrl = await userImageSnapshot.ref.getDownloadURL();
 
     // Upload business image to Firebase Storage
     final businessImageRef = FirebaseStorage.instance
-        .ref('business_images/$businessId/${businessImgUrl.path.split('/').last}');
+        .ref('business_images/${DateTime.now().millisecondsSinceEpoch}');
     final businessImageUploadTask = businessImageRef.putFile(businessImgUrl);
     final businessImageSnapshot = await businessImageUploadTask;
     final businessImageDownloadUrl = await businessImageSnapshot.ref.getDownloadURL();
@@ -93,9 +82,6 @@ class BusinessController {
 
 
 
-=======
-  }) async {
->>>>>>> origin/main
     final business = Business(
       id: '',
       userId: userId ,
@@ -109,10 +95,7 @@ class BusinessController {
       facebook: facebook,
       instagram: instagram,
       Userwebsite: Userwebsite,
-<<<<<<< HEAD
       UserImgUrl: userImageDownloadUrl,
-=======
->>>>>>> origin/main
       professionalExperience: professionalExperience,
       entrepreneurshipExperience: entrepreneurshipExperience,
       education: education,
@@ -131,10 +114,7 @@ class BusinessController {
       valueProposition: valueProposition,
       productOrServiceOffering: productOrServiceOffering,
       fundingNeeds: fundingNeeds,
-<<<<<<< HEAD
       businessImgUrl: businessImageDownloadUrl,
-=======
->>>>>>> origin/main
 
       fundAmount: fundAmount,
       fundPurpose: fundPurpose,
@@ -149,10 +129,7 @@ class BusinessController {
       investmentStage: investmentStage,
       industryFocus: industryFocus,
       investorLocation: investorLocation,
-<<<<<<< HEAD
       status: status,
-=======
->>>>>>> origin/main
     );
 
 
@@ -160,16 +137,11 @@ class BusinessController {
     await _BusinessService.addNewBusiness(business);
   }
 
-<<<<<<< HEAD
   Future<List<Business>> getNewBusinessesList() async {
-=======
-  Future<List<Business>> getNewBusinesses() async {
->>>>>>> origin/main
     List<Business> newBusinesses =
     await _BusinessService.getNewBusinessesList();
     return newBusinesses;
   }
-<<<<<<< HEAD
 
   Future<List<Business>> getNewBusiness(String businessName) async {
     return await _BusinessService.getNewBusiness(businessName);
@@ -180,59 +152,61 @@ class BusinessController {
   }
 
   Future<void> updateNewBusiness(
-  String businessId,
-   String userId,
-   String name,
-   String email,
-   String mobile,
-   String street,
-   String city,
-   String state,
-   String zipCode,
-   String country,
-   String industry,
-   String linkedin,
-   String twitter,
-   String facebook,
-   String instagram,
-   String Userwebsite,
-   File UserImgUrl,
-   String provider,
-   String pass,
-   List<String> professionalExperience,
-   List<String> entrepreneurshipExperience,
-   List<String> education,
-   List<String> industryCertifications,
-   List<String> awardsAchievements,
-   List<String> trackRecord,
-   String businessIndustry,
-   String businessName,
-   String businessLocation,
-   String companyDescription,
-   String website,
-   String executiveSummary,
-   String businessModel,
-   String valueProposition,
-   String productOrServiceOffering,
-   String fundingNeeds,
-   File businessImgUrl,
-   String fundAmount,
-   String fundPurpose,
-   String timeline,
-   String fundingSources,
-   String investmentTerms,
-   String investorBenefits,
-   String riskFactors,
-   String minimumInvestmentAmount,
-   String maximumInvestmentAmount,
-   String investmentStage,
-   List<String> industryFocus,
-   String investorLocation,
-   String investmentGoal,
-   String investmentCriteria,
-   String status, File? image,String userImageDownloadUrl,String businessImageDownloadUrl) async {
+      String businessId,
+      String userId,
+      String name,
+      String email,
+      String mobile,
+      String street,
+      String city,
+      String state,
+      String zipCode,
+      String country,
+      String industry,
+      String linkedin,
+      String twitter,
+      String facebook,
+      String instagram,
+      String Userwebsite,
+      File UserImgUrl,
+      String provider,
+      String pass,
+      List<String> professionalExperience,
+      List<String> entrepreneurshipExperience,
+      List<String> education,
+      List<String> industryCertifications,
+      List<String> awardsAchievements,
+      List<String> trackRecord,
+      String businessIndustry,
+      String businessName,
+      String businessLocation,
+      String companyDescription,
+      String website,
+      String executiveSummary,
+      String businessModel,
+      String valueProposition,
+      String productOrServiceOffering,
+      String fundingNeeds,
+      File businessImgUrl,
+      String fundAmount,
+      String fundPurpose,
+      String timeline,
+      String fundingSources,
+      String investmentTerms,
+      String investorBenefits,
+      String riskFactors,
+      String minimumInvestmentAmount,
+      String maximumInvestmentAmount,
+      String investmentStage,
+      List<String> industryFocus,
+      String investorLocation,
+      String investmentGoal,
+      String investmentCriteria,
+      String status, File? image,String userImageDownloadUrl,String businessImageDownloadUrl) async {
     try{
       if (image != null) {
+
+
         final storageRef = FirebaseStorage.instance
             .ref()
             .child('business_images/${DateTime.now().millisecondsSinceEpoch}');
@@ -352,6 +326,4 @@ class BusinessController {
   Future<void> deleteNewBusiness(String businessId) async {
     await _BusinessService.deleteNewBusiness(businessId);
   }
-=======
->>>>>>> origin/main
 }

@@ -15,6 +15,10 @@ abstract class UserInterface {
   Future<List<MainUser>> getInvestor(String userName);
   Future<List<MainUser>> getEntrepreneur(String userName);
 
+  Future<void> updateAdmin(MainUser mainUser);
+  Future<void> updateInvestor(MainUser mainUser);
+  Future<void> updateEntrepreneur(MainUser mainUser);
+
   Future<void> deleteAdmin(String userId);
   Future<void> deleteInvestor(String userId);
   Future<void> deleteEntrepreneur(String userId);

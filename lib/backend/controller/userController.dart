@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:pitchboxadmin/backend/model/mainUser.dart';
 import 'package:pitchboxadmin/backend/services/userService.dart';
 
@@ -76,6 +77,51 @@ class UserController {
 
   Future<List<MainUser>> getInvestor(String userName) async {
     return await _userService.getInvestor(userName);
+  }
+
+  Future<void> updateAdmin(String id, String name, String email, String password) async {
+    try{
+      MainUser mainUser = MainUser(
+          userId: id,
+          userName: name,
+          userEmail: email,
+          userPassword: password);
+        await _userService.updateAdmin(mainUser);
+
+    }catch(e){
+      debugPrint('Error updating user: $e');
+    }
+
+  }
+
+  Future<void> updateEntrepreneur(String id, String name, String email, String password) async {
+    try{
+      MainUser mainUser = MainUser(
+          userId: id,
+          userName: name,
+          userEmail: email,
+          userPassword: password);
+      await _userService.updateEntrepreneur(mainUser);
+
+    }catch(e){
+      debugPrint('Error updating user: $e');
+    }
+
+  }
+
+  Future<void> updateInvestor(String id, String name, String email, String password) async {
+    try{
+      MainUser mainUser = MainUser(
+          userId: id,
+          userName: name,
+          userEmail: email,
+          userPassword: password);
+      await _userService.updateInvestor(mainUser);
+
+    }catch(e){
+      debugPrint('Error updating user: $e');
+    }
+
   }
 
   Future<void> deleteAdmin(String userId) async {

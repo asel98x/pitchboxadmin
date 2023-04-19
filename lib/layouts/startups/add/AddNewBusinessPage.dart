@@ -7,6 +7,7 @@ import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:pitchboxadmin/appcolors.dart';
 import 'package:pitchboxadmin/appstyles.dart';
 import 'package:pitchboxadmin/backend/controller/IndustryController.dart';
+import 'package:pitchboxadmin/backend/controller/businessController.dart';
 import 'package:pitchboxadmin/backend/model/business.dart';
 import 'package:pitchboxadmin/backend/services/businessService.dart';
 
@@ -25,9 +26,11 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
   int _activeStepIndex = 0;
   bool isSubmitting = false;
   File? _imageFile;
+  File? _bimageFile;
 
   //List<BusinessTeam> _teamMembersList = [];
   BusinessService _businessService = BusinessService();
+  BusinessController _businessController = BusinessController();
 
   //====================================================================================//
   //----------------------Personal Information------------------------------------------//
@@ -184,6 +187,7 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
     late String productOrServiceOffering= _productOrServiceOffering.text;
     late String fundingNeeds= _fundingNeeds.text;
     late String website2 = _phoneController.text;
+    File? Bimage = _bimageFile;
 
     //----------------------Funding Requirments------------------------------------------//
 
@@ -208,9 +212,9 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
 
 
     try{
-      await _businessService.addNewBusiness(
-        Business(
-            id: 'id',
+      await _businessController.addNewBusiness(
+
+            id: userId,
             businessId: 'businessId',
             userId: userId,
             name: fullName,
@@ -229,7 +233,7 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
             facebook: facebook,
             instagram: instagram,
             Userwebsite: Userwebsite,
-            UserImgUrl: Uimage != null ? Uimage.path : "",
+            UserImgUrl: Uimage!,
 
 
             businessIndustry: businessIndustry,
@@ -242,7 +246,7 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
             valueProposition: valueProposition,
             productOrServiceOffering: productOrServiceOffering,
             fundingNeeds: fundingNeeds,
-            businessImgUrl: 'businessImgUrl',
+            businessImgUrl: Bimage!,
 
             fundAmount: fundAmount,
             fundPurpose: fundPurpose,
@@ -256,16 +260,14 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
             investmentStage: selectedInvestmentExperience!,
             industryFocus: industryFocus,
             investorLocation: investorLocation,
-            status: 'Pending'
+            status: 'Pending', street: '', state: '', zipCode: '', industry: '',investmentCriteria: '',investmentGoal: '',pass: '', provider: '',
 
-
-        )
       );
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Business idea added successfully!'),
-        ),
+        )
       );
 
     }catch (e) {
@@ -1218,6 +1220,24 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
                 },
               ),
               SizedBox(height: 20),
+              _bimageFile != null
+                  ? Image.file(
+                _bimageFile!,
+                height: 100.0,
+                width: 100.0,
+              )
+                  : Container(),
+              ElevatedButton(
+                onPressed: () async {
+                  final pickedFile = await ImagePicker().getImage(source: ImageSource.gallery);
+                  setState(() {
+                    if (pickedFile != null) {
+                      _bimageFile = File(pickedFile.path);
+                    }
+                  });
+                },
+                child: Text('Add Image'),
+              ),
             ],
           ),
         )),
