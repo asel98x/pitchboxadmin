@@ -1,9 +1,4 @@
 import 'dart:io';
-<<<<<<< HEAD
-=======
-import 'dart:ui';
->>>>>>> 174f45e (updates)
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -11,21 +6,14 @@ import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:pitchboxadmin/appcolors.dart';
 import 'package:pitchboxadmin/appstyles.dart';
 import 'package:pitchboxadmin/backend/controller/IndustryController.dart';
-<<<<<<< HEAD
-=======
 import 'package:pitchboxadmin/backend/controller/businessController.dart';
->>>>>>> 174f45e (updates)
 import 'package:pitchboxadmin/backend/model/business.dart';
 import 'package:pitchboxadmin/backend/services/businessService.dart';
 
 
 class updateBusinessPage extends StatefulWidget {
-<<<<<<< HEAD
-  const updateBusinessPage({Key? key}) : super(key: key);
-=======
   Business business;
   updateBusinessPage({required this.business, Key? key}) : super(key: key);
->>>>>>> 174f45e (updates)
 
   @override
   _updateBusinessPageState createState() =>
@@ -38,17 +26,11 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
   int _activeStepIndex = 0;
   bool isSubmitting = false;
   File? _imageFile;
-<<<<<<< HEAD
-
-  //List<BusinessTeam> _teamMembersList = [];
-  BusinessService _businessService = BusinessService();
-=======
   File? _imageFile2;
 
   //List<BusinessTeam> _teamMembersList = [];
   BusinessService _businessService = BusinessService();
   BusinessController _businessController = BusinessController();
->>>>>>> 174f45e (updates)
 
   //====================================================================================//
   //----------------------Personal Information------------------------------------------//
@@ -58,32 +40,13 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
   final _phoneController = TextEditingController();
   final _cityController = TextEditingController();
   final _countryController = TextEditingController();
-<<<<<<< HEAD
-  final _industryController = IndustryController();
-  final _professionalExperienceController = <TextEditingController>[
-    TextEditingController()
-  ];
-  final _entrepreneurshipExperienceController = <TextEditingController>[
-    TextEditingController()
-  ];
-  final _educationController = <TextEditingController>[TextEditingController()];
-  final _industryCertificationsController = <TextEditingController>[
-    TextEditingController()
-  ];
-  final _awardsAchievementsController = <TextEditingController>[
-    TextEditingController()
-  ];
-  final _trackRecordController = <TextEditingController>[
-    TextEditingController()
-  ];
-=======
+
   final _professionalExperienceController = <TextEditingController>[];
   final _entrepreneurshipExperienceController = <TextEditingController>[];
   final _educationController = <TextEditingController>[];
   final _industryCertificationsController = <TextEditingController>[];
   final _awardsAchievementsController = <TextEditingController>[];
   final _trackRecordController = <TextEditingController>[];
->>>>>>> 174f45e (updates)
   final _emailController = TextEditingController();
   final _facebookController = TextEditingController();
   final _twitterController = TextEditingController();
@@ -133,10 +96,9 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
   final _minimumInvestmentAmount = TextEditingController();
   final _maximumInvestmentAmount = TextEditingController();
   final List<String> _selectedInvestmentStage = ['seed', 'early-stage', 'growth-stage'];
-<<<<<<< HEAD
-=======
+
   final _industryController = IndustryController();
->>>>>>> 174f45e (updates)
+
   String? _selectedInvestmentExperience;
   List<String> _industryFocus = [];
   final _geographicLocation = TextEditingController();
@@ -148,8 +110,6 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
   @override
   void initState() {
     super.initState();
-<<<<<<< HEAD
-=======
     _userIdController.text = widget.business.userId;
     _fullNameController.text = widget.business.name;
     _phoneController.text = widget.business.mobile;
@@ -212,7 +172,6 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
     String? _selectedStatus = widget.business.status;
     String? _selectedInvestmentStage = widget.business.status;
 
->>>>>>> 174f45e (updates)
   }
 
   void _addProfessionalExperienceField() {
@@ -285,10 +244,8 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
     late String productOrServiceOffering= _productOrServiceOffering.text;
     late String fundingNeeds= _fundingNeeds.text;
     late String website2 = _phoneController.text;
-<<<<<<< HEAD
-=======
     File? Bimage = _imageFile2;
->>>>>>> 174f45e (updates)
+
 
     //----------------------Funding Requirments------------------------------------------//
 
@@ -394,11 +351,7 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
           children: [
             const SizedBox(height: 8,),
             TextFormField(
-<<<<<<< HEAD
-              controller: _fullNameController,
-=======
               controller: _userIdController,
->>>>>>> 174f45e (updates)
               decoration: InputDecoration(
                 labelText: 'User ID',
                 border: OutlineInputBorder(
@@ -413,25 +366,11 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
                 return null;
               },
             ),
-<<<<<<< HEAD
-            const SizedBox(height: 8,),
-=======
             const SizedBox(height: 20,),
->>>>>>> 174f45e (updates)
             TextFormField(
               controller: _fullNameController,
               decoration: InputDecoration(
                 labelText: 'Full Name',
-<<<<<<< HEAD
-                suffixIcon: Tooltip(
-                  message: 'Full Name',
-                  child: IconButton(
-                    icon: Icon(Icons.info),
-                    onPressed: () {},
-                  ),
-                ),
-=======
->>>>>>> 174f45e (updates)
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
                   borderSide: BorderSide(),
@@ -449,16 +388,6 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
               controller: _phoneController,
               decoration: InputDecoration(
                 labelText: 'Mobile',
-<<<<<<< HEAD
-                suffixIcon: Tooltip(
-                  message: 'Mobile',
-                  child: IconButton(
-                    icon: Icon(Icons.info),
-                    onPressed: () {},
-                  ),
-                ),
-=======
->>>>>>> 174f45e (updates)
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
                   borderSide: BorderSide(),
@@ -476,16 +405,6 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
               controller: _cityController,
               decoration: InputDecoration(
                 labelText: 'City',
-<<<<<<< HEAD
-                suffixIcon: Tooltip(
-                  message: 'City',
-                  child: IconButton(
-                    icon: Icon(Icons.info),
-                    onPressed: () {},
-                  ),
-                ),
-=======
->>>>>>> 174f45e (updates)
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
                   borderSide: BorderSide(),
@@ -503,16 +422,6 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
               controller: _countryController,
               decoration: InputDecoration(
                 labelText: 'Country',
-<<<<<<< HEAD
-                suffixIcon: Tooltip(
-                  message: 'Country',
-                  child: IconButton(
-                    icon: Icon(Icons.info),
-                    onPressed: () {},
-                  ),
-                ),
-=======
->>>>>>> 174f45e (updates)
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
                   borderSide: BorderSide(),
@@ -950,16 +859,6 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
               controller: _emailController,
               decoration: InputDecoration(
                 labelText: 'Email',
-<<<<<<< HEAD
-                suffixIcon: Tooltip(
-                  message: 'enter Email',
-                  child: IconButton(
-                    icon: Icon(Icons.info),
-                    onPressed: () {},
-                  ),
-                ),
-=======
->>>>>>> 174f45e (updates)
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
                   borderSide: BorderSide(),
@@ -971,16 +870,6 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
               controller: _linkedinController,
               decoration: InputDecoration(
                 labelText: 'Linkedin profile',
-<<<<<<< HEAD
-                suffixIcon: Tooltip(
-                  message: 'enter Linkedin profile link',
-                  child: IconButton(
-                    icon: Icon(Icons.info),
-                    onPressed: () {},
-                  ),
-                ),
-=======
->>>>>>> 174f45e (updates)
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
                   borderSide: BorderSide(),
@@ -992,16 +881,6 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
               controller: _facebookController,
               decoration: InputDecoration(
                 labelText: 'Facebook profile',
-<<<<<<< HEAD
-                suffixIcon: Tooltip(
-                  message: 'enter Facebook profile link',
-                  child: IconButton(
-                    icon: Icon(Icons.info),
-                    onPressed: () {},
-                  ),
-                ),
-=======
->>>>>>> 174f45e (updates)
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
                   borderSide: BorderSide(),
@@ -1013,16 +892,6 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
               controller: _twitterController,
               decoration: InputDecoration(
                 labelText: 'Twitter profile',
-<<<<<<< HEAD
-                suffixIcon: Tooltip(
-                  message: 'enter Twitter profile link',
-                  child: IconButton(
-                    icon: Icon(Icons.info),
-                    onPressed: () {},
-                  ),
-                ),
-=======
->>>>>>> 174f45e (updates)
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
                   borderSide: BorderSide(),
@@ -1034,16 +903,6 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
               controller: _instagramController,
               decoration: InputDecoration(
                 labelText: 'Instagram profile',
-<<<<<<< HEAD
-                suffixIcon: Tooltip(
-                  message: 'enter Instagram profile link',
-                  child: IconButton(
-                    icon: Icon(Icons.info),
-                    onPressed: () {},
-                  ),
-                ),
-=======
->>>>>>> 174f45e (updates)
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
                   borderSide: BorderSide(),
@@ -1055,16 +914,6 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
               controller: _websiteController,
               decoration: InputDecoration(
                 labelText: 'Website',
-<<<<<<< HEAD
-                suffixIcon: Tooltip(
-                  message: 'enter Website link',
-                  child: IconButton(
-                    icon: Icon(Icons.info),
-                    onPressed: () {},
-                  ),
-                ),
-=======
->>>>>>> 174f45e (updates)
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
                   borderSide: BorderSide(),
@@ -1078,11 +927,7 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
               height: 100.0,
               width: 100.0,
             )
-<<<<<<< HEAD
-                : Container(),
-=======
                 : Image.network(widget.business.UserImgUrl),
->>>>>>> 174f45e (updates)
             ElevatedButton(
               onPressed: () async {
                 final pickedFile = await ImagePicker().getImage(source: ImageSource.gallery);
@@ -1138,29 +983,6 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
                 },
               ),
               SizedBox(height: 20),
-<<<<<<< HEAD
-              TextFormField(
-                controller: _businessIndustry,
-                decoration: InputDecoration(
-                  labelText: 'Business Industry',
-                  suffixIcon: Tooltip(
-                    message: 'Business Industry',
-                    child: IconButton(
-                      icon: Icon(Icons.info),
-                      onPressed: () {},
-                    ),
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(),
-                  ),
-                ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please enter Business Industry';
-                  }
-                  return null;
-=======
               FutureBuilder<List<String>>(
                 future: _industryController.getIndustryNames(),
                 builder: (context, snapshot) {
@@ -1196,7 +1018,6 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
                       ],
                     ),
                   );
->>>>>>> 174f45e (updates)
                 },
               ),
               SizedBox(height: 20),
@@ -1402,9 +1223,6 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
                   return null;
                 },
               ),
-<<<<<<< HEAD
-              SizedBox(height: 20),
-=======
               SizedBox(height: 20.0),
               _imageFile2 != null
                   ? Image.file(
@@ -1424,7 +1242,6 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
                 },
                 child: Text('Add Image'),
               ),
->>>>>>> 174f45e (updates)
             ],
           ),
         )),
@@ -1933,48 +1750,6 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
                   });
                 },
               ),
-<<<<<<< HEAD
-              SizedBox(height: 20),
-              FutureBuilder<List<String>>(
-                future: _industryController.getIndustryNames(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                  if (snapshot.hasError) {
-                    return Center(
-                      child: Text('Error: ${snapshot.error}'),
-                    );
-                  }
-                  final industryNames = snapshot.data!;
-                  return Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        const Text('Select your industries of interest'),
-                        const SizedBox(height: 8),
-                        MultiSelectDialogField<String>(
-                          title: const Text('Industries'),
-                          items: industryNames
-                              .map((industry) => MultiSelectItem(industry, industry))
-                              .toList(),
-                          initialValue: _industryFocus,
-                          buttonText : const Text('Select Industries'),
-                          onConfirm: (value) {
-                            setState(() {
-                              _industryFocus = value;
-                            });
-                          },
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-
-=======
->>>>>>> 174f45e (updates)
               const SizedBox( height: 20,),
               DropdownButtonFormField<String>(
                 value: _selectedStatus,
