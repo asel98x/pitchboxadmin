@@ -18,7 +18,7 @@ class _DashboardState extends State<Dashboard> {
   int _currentIndex = 0;
   late PageController _pageController;
 
-  final List<Widget> _pages = [    BusinessPage(),    LoanPage(),    UserPage(),    ProfilePage(),  ];
+  final List<Widget> _pages = [    BusinessPage(),    LoanPage(businessId: '',),    UserPage(),    ProfilePage(),  ];
 
   @override
   void initState(){

@@ -190,8 +190,9 @@ class _AdminTabState extends State<AdminTab> {
                         String name = _nameController.text;
                         String email = _emailController.text;
                         String password = _passwordController.text;
+                        String userType = 'admin';
 
-                        await _controller.updateAdmin(id, name, email, password);
+                        await _controller.updateAdmin(id, name, email, password, userType);
                         print('after');
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text('User information updated')),

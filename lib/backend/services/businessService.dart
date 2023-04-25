@@ -101,6 +101,7 @@ class BusinessService implements BusinessInterface{
         fundingNeeds: doc['fundingNeeds'],
         businessImgUrl: doc['businessImgUrl'],
         fundAmount: doc['fundAmount'],
+        avaiableFundAmount: doc['avaiableFundAmount'],
         fundPurpose: doc['fundPurpose'],
         timeline: doc['timeline'],
         fundingSources: doc['fundingSources'],

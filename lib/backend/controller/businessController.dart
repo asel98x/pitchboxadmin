@@ -49,6 +49,7 @@ class BusinessController {
     required String fundingNeeds,
     required File businessImgUrl,
     required String fundAmount,
+    required String avaiableFundAmount,
     required String fundPurpose,
     required String timeline,
     required String fundingSources,
@@ -117,6 +118,7 @@ class BusinessController {
       businessImgUrl: businessImageDownloadUrl,
 
       fundAmount: fundAmount,
+      avaiableFundAmount: avaiableFundAmount,
       fundPurpose: fundPurpose,
       timeline: timeline,
       fundingSources: fundingSources,
@@ -189,6 +191,7 @@ class BusinessController {
       String fundingNeeds,
       File businessImgUrl,
       String fundAmount,
+      String avaiableFundAmount,
       String fundPurpose,
       String timeline,
       String fundingSources,
@@ -249,6 +252,7 @@ class BusinessController {
           businessImgUrl: businessImageDownloadUrl,
 
           fundAmount: fundAmount,
+          avaiableFundAmount:avaiableFundAmount,
           fundPurpose: fundPurpose,
           timeline: timeline,
           fundingSources: fundingSources,
@@ -301,6 +305,7 @@ class BusinessController {
           businessImgUrl: businessImageDownloadUrl,
 
           fundAmount: fundAmount,
+          avaiableFundAmount:avaiableFundAmount,
           fundPurpose: fundPurpose,
           timeline: timeline,
           fundingSources: fundingSources,

@@ -89,36 +89,54 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
   postDetailsToFirestore() async {
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     User? user = _auth.currentUser;
-
-    MainUser userModel = MainUser(
-        userId: user!.uid, // Use user.uid instead of user.userId
-        userName: _nameController.text,
-        userEmail: _emailController.text,
-        userPassword: _confirmPasswordController.text);
+    String userType;
 
     if (controller.index == 0) {
+      userType = 'entrepreneur';
+      MainUser userModel = MainUser(
+
+          userId: user!.uid, // Use user.uid instead of user.userId
+          userName: _nameController.text,
+          userEmail: _emailController.text,
+          userPassword: _confirmPasswordController.text,
+          userType: userType);
       await firebaseFirestore
-          .collection("Entrepreneur")
+          .collection("users")
           .doc(user.uid) // Use user.uid here as well
           .set(userModel.toMap());
       Fluttertoast.showToast(msg: "Entrepreneur Account created successfully");
+
     } else if (controller.index == 1) {
+      userType = 'investor';
+      MainUser userModel = MainUser(
+
+          userId: user!.uid, // Use user.uid instead of user.userId
+          userName: _nameController.text,
+          userEmail: _emailController.text,
+          userPassword: _confirmPasswordController.text,
+          userType: userType);
       await firebaseFirestore
-          .collection("investor")
+          .collection("users")
           .doc(user.uid) // Use user.uid here as well
           .set(userModel.toMap());
       Fluttertoast.showToast(msg: "Investor Account created successfully");
+
     }
     else if (controller.index == 2) {
+      userType = 'admin';
+      MainUser userModel = MainUser(
+
+          userId: user!.uid, // Use user.uid instead of user.userId
+          userName: _nameController.text,
+          userEmail: _emailController.text,
+          userPassword: _confirmPasswordController.text,
+          userType: userType);
       await firebaseFirestore
-          .collection("Admin")
+          .collection("users")
           .doc(user.uid) // Use user.uid here as well
           .set(userModel.toMap());
       Fluttertoast.showToast(msg: "Admin Account created successfully");
     }
-
-
-
   }
 
 

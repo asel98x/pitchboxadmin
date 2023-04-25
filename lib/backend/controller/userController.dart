@@ -10,12 +10,16 @@ class UserController {
   required String userName,
   required String userEmail,
   required String userPassword,
+  required String userType,
+
   })async {
     final mainUser = MainUser(
         userId: userId,
         userName: userName,
         userEmail: userEmail,
-        userPassword: userPassword);
+        userPassword: userPassword,
+        userType: userType
+    );
 
     await _userService.addAdmin(mainUser);
 
@@ -26,12 +30,14 @@ class UserController {
     required String userName,
     required String userEmail,
     required String userPassword,
+    required String userType,
   })async {
     final mainUser = MainUser(
         userId: userId,
         userName: userName,
         userEmail: userEmail,
-        userPassword: userPassword);
+        userPassword: userPassword,
+        userType: userType);
 
     await _userService.addEntrepreneur(mainUser);
   }
@@ -42,12 +48,14 @@ class UserController {
     required String userName,
     required String userEmail,
     required String userPassword,
+    required String userType,
   })async {
     final mainUser = MainUser(
         userId: userId,
         userName: userName,
         userEmail: userEmail,
-        userPassword: userPassword);
+        userPassword: userPassword,
+        userType: userType);
 
     await _userService.addInvestor(mainUser);
   }
@@ -79,13 +87,14 @@ class UserController {
     return await _userService.getInvestor(userName);
   }
 
-  Future<void> updateAdmin(String id, String name, String email, String password) async {
+  Future<void> updateAdmin(String id, String name, String email, String password, String userType) async {
     try{
       MainUser mainUser = MainUser(
           userId: id,
           userName: name,
           userEmail: email,
-          userPassword: password);
+          userPassword: password,
+          userType: userType);
         await _userService.updateAdmin(mainUser);
 
     }catch(e){
@@ -94,13 +103,14 @@ class UserController {
 
   }
 
-  Future<void> updateEntrepreneur(String id, String name, String email, String password) async {
+  Future<void> updateEntrepreneur(String id, String name, String email, String password, String userType) async {
     try{
       MainUser mainUser = MainUser(
           userId: id,
           userName: name,
           userEmail: email,
-          userPassword: password);
+          userPassword: password,
+          userType: userType);
       await _userService.updateEntrepreneur(mainUser);
 
     }catch(e){
@@ -109,13 +119,14 @@ class UserController {
 
   }
 
-  Future<void> updateInvestor(String id, String name, String email, String password) async {
+  Future<void> updateInvestor(String id, String name, String email, String password, String userType) async {
     try{
       MainUser mainUser = MainUser(
           userId: id,
           userName: name,
           userEmail: email,
-          userPassword: password);
+          userPassword: password,
+          userType: userType);
       await _userService.updateInvestor(mainUser);
 
     }catch(e){

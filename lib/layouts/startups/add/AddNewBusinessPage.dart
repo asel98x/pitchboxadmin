@@ -109,6 +109,8 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
   String? _selectedInvestmentExperience;
   List<String> _industryFocus = [];
   final _geographicLocation = TextEditingController();
+  final List<String> _status = ['Pending', 'Accepted', 'Rejected'];
+  String? _selectedstatus;
 
 
 
@@ -249,6 +251,7 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
             businessImgUrl: Bimage!,
 
             fundAmount: fundAmount,
+            avaiableFundAmount: '0',
             fundPurpose: fundPurpose,
             timeline: timeline,
             fundingSources: fundingSources,
@@ -260,7 +263,15 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
             investmentStage: selectedInvestmentExperience!,
             industryFocus: industryFocus,
             investorLocation: investorLocation,
-            status: 'Pending', street: '', state: '', zipCode: '', industry: '',investmentCriteria: '',investmentGoal: '',pass: '', provider: '',
+            status: 'Pending',
+            street: '',
+            state: '',
+            zipCode: '',
+            industry: '',
+            investmentCriteria: '',
+            investmentGoal: '',
+            pass: '',
+            provider: '',
 
       );
 
@@ -301,7 +312,7 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
               ),
               validator: (value) {
                 if (value!.isEmpty) {
-                  return 'Please enter Business Name';
+                  return 'Please enter User ID';
                 }
                 return null;
               },
@@ -311,13 +322,6 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
               controller: _fullNameController,
               decoration: InputDecoration(
                 labelText: 'Full Name',
-                suffixIcon: Tooltip(
-                  message: 'Full Name',
-                  child: IconButton(
-                    icon: Icon(Icons.info),
-                    onPressed: () {},
-                  ),
-                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
                   borderSide: BorderSide(),
@@ -335,13 +339,6 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
               controller: _phoneController,
               decoration: InputDecoration(
                 labelText: 'Mobile',
-                suffixIcon: Tooltip(
-                  message: 'Mobile',
-                  child: IconButton(
-                    icon: Icon(Icons.info),
-                    onPressed: () {},
-                  ),
-                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
                   borderSide: BorderSide(),
@@ -359,13 +356,6 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
               controller: _cityController,
               decoration: InputDecoration(
                 labelText: 'City',
-                suffixIcon: Tooltip(
-                  message: 'City',
-                  child: IconButton(
-                    icon: Icon(Icons.info),
-                    onPressed: () {},
-                  ),
-                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
                   borderSide: BorderSide(),
@@ -383,13 +373,6 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
               controller: _countryController,
               decoration: InputDecoration(
                 labelText: 'Country',
-                suffixIcon: Tooltip(
-                  message: 'Country',
-                  child: IconButton(
-                    icon: Icon(Icons.info),
-                    onPressed: () {},
-                  ),
-                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
                   borderSide: BorderSide(),
@@ -1784,9 +1767,24 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
                   );
                 },
               ),
-
-              const SizedBox(
-                height: 20,
+              const SizedBox(height: 20,),
+              DropdownButtonFormField<String>(
+                value: _selectedstatus,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Status',
+                ),
+                items: _status.map((String option) {
+                  return DropdownMenuItem<String>(
+                    value: option,
+                    child: Text(option),
+                  );
+                }).toList(),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    _selectedstatus = newValue;
+                  });
+                },
               ),
             ],
           ),

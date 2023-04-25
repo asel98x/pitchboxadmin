@@ -190,8 +190,9 @@ class _InvestorTabState extends State<InvestorTab> {
                         String name = _nameController.text;
                         String email = _emailController.text;
                         String password = _passwordController.text;
+                        String userType = 'investor';
 
-                        await _controller.updateInvestor(id, name, email, password);
+                        await _controller.updateInvestor(id, name, email, password, userType);
                         print('after');
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text('User information updated')),

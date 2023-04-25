@@ -126,8 +126,8 @@ class _StartupTabState extends State<StartupTab> {
                               children: [
                                 Padding(
                                   padding: EdgeInsets.all(8.0),
-                                  child: Image.asset(
-                                    'assets/images/DryFoodsComp.jpg',
+                                  child: Image.network(
+                                      business.businessImgUrl,
                                     fit: BoxFit.cover,
                                     height: 125.0,
                                   ),
@@ -152,8 +152,8 @@ class _StartupTabState extends State<StartupTab> {
                                       ],
                                     ),
                                     child: CircleAvatar(
-                                      backgroundImage: AssetImage(
-                                        'assets/images/RyanReynolds-2019_r.jpg',
+                                      backgroundImage: NetworkImage(
+                                        business.UserImgUrl,
                                       ),
                                       radius: 28.0,
                                     ),
@@ -188,7 +188,7 @@ class _StartupTabState extends State<StartupTab> {
                                 ),
                                 SizedBox(height: 16.0),
                                 Text(
-                                  'Over 150M in Lifetime Revenue and 4M+ games sold through DTC, Target, Walmart and Amazon',
+                                  business.executiveSummary,
                                   style: ralewayStyle.copyWith(
                                     fontSize: 16.0,
                                     color: AppColors.greyColor,
@@ -202,7 +202,7 @@ class _StartupTabState extends State<StartupTab> {
                                   MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      '\$66,000',
+                                      '\$'+business.fundAmount,
                                       style: ralewayStyle.copyWith(
                                         fontSize: 22.0,
                                         color: AppColors.blueDarkColor,

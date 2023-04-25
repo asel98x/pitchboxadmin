@@ -5,18 +5,17 @@ import 'package:pitchboxadmin/test%20oop/model/user.dart';
 
 class UserService implements UserInterface {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final CollectionReference entrepreneurCollection = FirebaseFirestore.instance.collection('Entrepreneur');
-  final CollectionReference investorCollection = FirebaseFirestore.instance.collection('investor');
-  final CollectionReference adminCollection = FirebaseFirestore.instance.collection('Admin');
+  final CollectionReference userCollection = FirebaseFirestore.instance.collection('users');
 
   @override
   Future<DocumentReference> addAdmin(MainUser mainUser) async{
-    final docRef = adminCollection.doc();
+    final docRef = userCollection.doc();
     await docRef.set({
       'userId': docRef.id,
       'userName': mainUser.userName,
       'userEmail': mainUser.userEmail,
       'userPassword': mainUser.userPassword,
+      'userType': mainUser.userType,
     });
 
     return docRef;
@@ -24,12 +23,13 @@ class UserService implements UserInterface {
 
   @override
   Future<DocumentReference> addEntrepreneur(MainUser mainUser) async{
-    final docRef = entrepreneurCollection.doc();
+    final docRef = userCollection.doc();
     await docRef.set({
       'userId': docRef.id,
       'userName': mainUser.userName,
       'userEmail': mainUser.userEmail,
       'userPassword': mainUser.userPassword,
+      'userType': mainUser.userType,
     });
 
     return docRef;
@@ -37,20 +37,22 @@ class UserService implements UserInterface {
 
   @override
   Future<DocumentReference> addInvestor(MainUser mainUser) async{
-    final docRef = investorCollection.doc();
+    final docRef = userCollection.doc();
     await docRef.set({
       'userId': docRef.id,
       'userName': mainUser.userName,
       'userEmail': mainUser.userEmail,
       'userPassword': mainUser.userPassword,
+      'userType': mainUser.userType,
     });
 
     return docRef;
   }
 
   @override
-  Future<List<MainUser>> getAdminList() async{
-    QuerySnapshot querySnapshot = await adminCollection.get();
+  Future<List<MainUser>> getAdminList() async {
+    QuerySnapshot querySnapshot =
+    await userCollection.where('userType', isEqualTo: 'admin').get();
     List<MainUser> adminList = [];
 
     querySnapshot.docs.forEach((doc) {
@@ -59,10 +61,8 @@ class UserService implements UserInterface {
         userName: doc['userName'],
         userEmail: doc['userEmail'],
         userPassword: doc['userPassword'],
-
+        userType: doc['userType'],
       );
-
-
       adminList.add(mainUser);
     });
 
@@ -70,9 +70,11 @@ class UserService implements UserInterface {
   }
 
 
+
   @override
   Future<List<MainUser>> getEntrepreneurList() async{
-    QuerySnapshot querySnapshot = await entrepreneurCollection.get();
+    QuerySnapshot querySnapshot =
+    await userCollection.where('userType', isEqualTo: 'entrepreneur').get();
     List<MainUser> entrepreneurList = [];
 
     querySnapshot.docs.forEach((doc) {
@@ -81,6 +83,7 @@ class UserService implements UserInterface {
         userName: doc['userName'],
         userEmail: doc['userEmail'],
         userPassword: doc['userPassword'],
+        userType: doc['userType'],
 
       );
 
@@ -93,7 +96,8 @@ class UserService implements UserInterface {
 
   @override
   Future<List<MainUser>> getInvestorList() async {
-    QuerySnapshot querySnapshot = await investorCollection.get();
+    QuerySnapshot querySnapshot =
+    await userCollection.where('userType', isEqualTo: 'investor').get();
     List<MainUser> investotList = [];
 
     querySnapshot.docs.forEach((doc) {
@@ -102,6 +106,7 @@ class UserService implements UserInterface {
         userName: doc['userName'],
         userEmail: doc['userEmail'],
         userPassword: doc['userPassword'],
+        userType: doc['userType'],
 
       );
 
@@ -115,7 +120,7 @@ class UserService implements UserInterface {
   @override
   Future<List<MainUser>> getAdmin(String userName) async{
     QuerySnapshot querySnapshot = await _firestore
-        .collection('Admin')
+        .collection('users')
         .where('userName', isEqualTo: userName)
         .get();
     List<MainUser> admins = [];
@@ -128,7 +133,7 @@ class UserService implements UserInterface {
   @override
   Future<List<MainUser>> getEntrepreneur(String userName) async{
     QuerySnapshot querySnapshot = await _firestore
-        .collection('Entrepreneur')
+        .collection('users')
         .where('userName', isEqualTo: userName)
         .get();
     List<MainUser> entrepreneurs = [];
@@ -141,7 +146,7 @@ class UserService implements UserInterface {
   @override
   Future<List<MainUser>> getInvestor(String userName) async{
     QuerySnapshot querySnapshot = await _firestore
-        .collection('investor')
+        .collection('users')
         .where('userName', isEqualTo: userName)
         .get();
     List<MainUser> investors = [];
@@ -153,23 +158,23 @@ class UserService implements UserInterface {
 
   @override
   Future<void> deleteAdmin(String userId) async{
-    await _firestore.collection('Admin').doc(userId).delete();
+    await _firestore.collection('users').doc(userId).delete();
   }
 
   @override
   Future<void> deleteEntrepreneur(String userId) async{
-    await _firestore.collection('Entrepreneur').doc(userId).delete();
+    await _firestore.collection('users').doc(userId).delete();
   }
 
   @override
   Future<void> deleteInvestor(String userId) async{
-    await _firestore.collection('investor').doc(userId).delete();
+    await _firestore.collection('users').doc(userId).delete();
   }
 
   @override
   Future<void> updateAdmin(MainUser mainUser) async{
     await _firestore
-        .collection('Admin')
+        .collection('users')
         .doc(mainUser.userId)
         .update(mainUser.toMap());
   }
@@ -177,7 +182,7 @@ class UserService implements UserInterface {
   @override
   Future<void> updateEntrepreneur(MainUser mainUser) async{
     await _firestore
-        .collection('Entrepreneur')
+        .collection('users')
         .doc(mainUser.userId)
         .update(mainUser.toMap());
   }
@@ -185,7 +190,7 @@ class UserService implements UserInterface {
   @override
   Future<void> updateInvestor(MainUser mainUser) async{
     await _firestore
-        .collection('investor')
+        .collection('users')
         .doc(mainUser.userId)
         .update(mainUser.toMap());
   }

@@ -307,6 +307,7 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
               businessImgUrl: 'businessImgUrl',
 
               fundAmount: fundAmount,
+              avaiableFundAmount: '',
               fundPurpose: fundPurpose,
               timeline: timeline,
               fundingSources: fundingSources,
@@ -318,7 +319,7 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
               investmentStage: selectedInvestmentExperience!,
               industryFocus: industryFocus,
               investorLocation: investorLocation,
-              status: 'Pending'
+              status: 'Pending',
 
 
           )

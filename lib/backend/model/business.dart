@@ -35,6 +35,7 @@ class Business {
   String businessImgUrl;
 
   String fundAmount;
+  String avaiableFundAmount;
   String fundPurpose;
   String timeline;
   String fundingSources;
@@ -83,6 +84,7 @@ class Business {
     required this.fundingNeeds,
     required this.businessImgUrl,
     required this.fundAmount,
+    required this.avaiableFundAmount,
     required this.fundPurpose,
     required this.timeline,
     required this.fundingSources,
@@ -134,6 +136,7 @@ class Business {
         fundingNeeds: snapshot['fundingNeeds'],
         businessImgUrl: snapshot['businessImgUrl'],
         fundAmount: snapshot['fundAmount'],
+        avaiableFundAmount:snapshot ['avaiableFundAmount'],
         fundPurpose: snapshot['fundPurpose'],
         timeline: snapshot['timeline'],
         fundingSources: snapshot['fundingSources'],
@@ -181,6 +184,7 @@ class Business {
       'fundingNeeds': fundingNeeds,
       'businessImgUrl': businessImgUrl,
       'fundAmount': fundAmount,
+      'avaiableFundAmount': avaiableFundAmount,
       'fundPurpose': fundPurpose,
       'timeline': timeline,
       'fundingSources': fundingSources,
