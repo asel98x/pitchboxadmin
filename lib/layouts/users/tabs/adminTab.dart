@@ -31,6 +31,14 @@ class _AdminTabState extends State<AdminTab> {
     _loadadminList();
   }
 
+  void clear(){
+    _nameController.text = '';
+    _emailController.text = '';
+    _passwordController.text = '';
+    _passwordController.text = '';
+    _confirmPasswordController.text = '';
+  }
+
   Future<void> _loadadminList() async {
     List<MainUser> adminList = await _controller.getAdminList();
     setState(() {
@@ -237,6 +245,9 @@ class _AdminTabState extends State<AdminTab> {
         _controller.deleteAdmin(mainUser.userId);
         // Refresh the list after deletion
         _handleRefresh();
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('User Deleted!')),
+        );
       }
     });
   }

@@ -83,6 +83,7 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
   //----------------------Funding Requirments------------------------------------------//
   //====================================================================================//
   final _fundAmount = TextEditingController();
+  String availableFundAmount='';
   final _fundPurpose = TextEditingController();
   final _timeline = TextEditingController();
   final _fundingSources = TextEditingController();
@@ -103,7 +104,7 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
   List<String> _industryFocus = [];
   final _geographicLocation = TextEditingController();
 
-  final List<String> _status = ['Pending', 'Confirm', 'Reject'];
+  final List<String> _status = ['Pending', 'Accepted', 'Rejected'];
   String? _selectedStatus;
 
 
@@ -112,7 +113,6 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
     super.initState();
     _userIdController.text = widget.business.userId;
     _fullNameController.text = widget.business.name;
-    _phoneController.text = widget.business.mobile;
     _phoneController.text = widget.business.mobile;
     _cityController.text = widget.business.city;
     _countryController.text = widget.business.country;
@@ -131,9 +131,6 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
     widget.business.awardsAchievements.forEach((element) {
       _awardsAchievementsController.add(TextEditingController(text: element.toString()));
     });
-    widget.business.awardsAchievements.forEach((element) {
-      _awardsAchievementsController.add(TextEditingController(text: element.toString()));
-    });
     widget.business.trackRecord.forEach((element) {
       _trackRecordController.add(TextEditingController(text: element.toString()));
     });
@@ -146,7 +143,8 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
 
 
     _businessName.text = widget.business.businessName;
-
+    _industryFocus = widget.business.industryFocus;
+    _businessIndustry.text = widget.business.businessIndustry;
     _businessLocation.text = widget.business.businessLocation;
     _companyDescription.text = widget.business.companyDescription;
     _website2.text = widget.business.website;
@@ -158,6 +156,7 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
 
 
     _fundAmount.text = widget.business.fundAmount;
+    availableFundAmount = widget.business.avaiableFundAmount;
     _fundPurpose.text = widget.business.fundPurpose;
     _timeline.text = widget.business.timeline;
     _fundingSources.text = widget.business.fundingSources;
@@ -169,8 +168,29 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
     _minimumInvestmentAmount.text = widget.business.minimumInvestmentAmount;
     _maximumInvestmentAmount.text = widget.business.maximumInvestmentAmount;
     _geographicLocation.text = widget.business.investorLocation;
-    String? _selectedStatus = widget.business.status;
-    String? _selectedInvestmentStage = widget.business.status;
+    _selectedStatus = widget.business.status;
+    _selectedInvestmentExperience = widget.business.investmentStage;
+
+    String street = '';
+    String state = '';
+    String zipCode = '';
+    String industry = '';
+
+
+    File? Uimage = _imageFile;
+    File? bimage = _imageFile2;
+    File? UserImgUrl = Uimage;
+    File? businessImgUrl = bimage;
+
+    String provider = '';
+    String pass = '';
+    String businessIndustry = '';
+    String investmentGoal = '';
+    String investmentCriteria = '';
+    String status = '';
+    String userImageDownloadUrl = widget.business.UserImgUrl;
+    String businessImageDownloadUrl = widget.business.businessImgUrl;
+    Null image = null;
 
   }
 
@@ -243,13 +263,14 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
     late String valueProposition= _valueProposition.text;
     late String productOrServiceOffering= _productOrServiceOffering.text;
     late String fundingNeeds= _fundingNeeds.text;
-    late String website2 = _phoneController.text;
+    late String website2 = _website2.text;
     File? Bimage = _imageFile2;
 
 
     //----------------------Funding Requirments------------------------------------------//
 
     late String fundAmount = _fundAmount.text;
+    late String AfundAmount = availableFundAmount;
     late String fundPurpose = _fundPurpose.text;
     late String timeline = _timeline.text;
     late String fundingSources = _fundingSources.text;
@@ -264,16 +285,16 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
     late String minimumInvestmentAmount = _minimumInvestmentAmount.text;
     late String maximumInvestmentAmount = _maximumInvestmentAmount.text;
     late String investorLocation = _geographicLocation.text;
-    String? selectedInvestmentExperience=  _selectedInvestmentExperience;
+    String? selectedInvestmentExperience = _selectedInvestmentExperience;
     late List<String> industryFocus =  _industryFocus;
+    String? selectedStatus = _selectedStatus;
 
 
 
     try{
-      await _businessService.addNewBusiness(
-          Business(
-              id: 'id',
-              businessId: 'businessId',
+      await _businessController.updateNewBusiness(
+
+              id: widget.business.id,
               userId: userId,
               name: fullName,
               mobile: mobile,
@@ -291,50 +312,61 @@ class _updateBusinessPageState extends State<updateBusinessPage> {
               facebook: facebook,
               instagram: instagram,
               Userwebsite: Userwebsite,
-              UserImgUrl: Uimage != null ? Uimage.path : "",
+              UserImgUrl: _imageFile,
 
 
-              businessIndustry: businessIndustry,
               businessName: businessName,
+              businessIndustry: businessIndustry,
               businessLocation: businessLocation,
-              companyDescription: companyDescription,
-              website: website2,
               executiveSummary: executiveSummary,
+              companyDescription: companyDescription,
               businessModel: businessModel,
               valueProposition: valueProposition,
               productOrServiceOffering: productOrServiceOffering,
               fundingNeeds: fundingNeeds,
-              businessImgUrl: 'businessImgUrl',
+              website: website2,
+              businessImgUrl: _imageFile2,
 
               fundAmount: fundAmount,
-              avaiableFundAmount: '',
+              avaiableFundAmount: AfundAmount,
               fundPurpose: fundPurpose,
               timeline: timeline,
               fundingSources: fundingSources,
               investmentTerms: investmentTerms,
               investorBenefits: investorBenefits,
               riskFactors: riskFactors,
+
               minimumInvestmentAmount: minimumInvestmentAmount,
               maximumInvestmentAmount: maximumInvestmentAmount,
               investmentStage: selectedInvestmentExperience!,
               industryFocus: industryFocus,
               investorLocation: investorLocation,
-              status: 'Pending',
+              status: selectedStatus!,
+              street: '',
+              state: '',
+              zipCode: '',
+              industry: '',
+              provider: '',
+              pass: '',
+              investmentGoal: '',
+              investmentCriteria: '',
+              image: null,
+              userImageDownloadUrl: widget.business.UserImgUrl,
+              businessImageDownloadUrl: widget.business.businessImgUrl
 
 
-          )
       );
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Business idea added successfully!'),
+          content: Text('Business idea updated successfully!'),
         ),
       );
 
     }catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Failed to add BUsiness idea'),
+          content: Text('Failed to update BUsiness idea'),
         ),
       );
       print(e.toString());

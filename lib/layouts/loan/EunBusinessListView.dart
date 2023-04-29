@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:pitchboxadmin/appIcons.dart';
 import 'package:pitchboxadmin/appcolors.dart';
 import 'package:pitchboxadmin/appstyles.dart';
+import 'package:pitchboxadmin/backend/controller/businessController.dart';
 import 'package:pitchboxadmin/backend/controller/loanController.dart';
 import 'package:pitchboxadmin/backend/model/business.dart';
+import 'package:pitchboxadmin/backend/model/loan.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 
 class EunBusinessListView extends StatefulWidget {
-  Business business;
-
-  EunBusinessListView({required this.business, Key? key}) : super(key: key);
+  final String businessId;
+  const EunBusinessListView({Key? key, required this.businessId}) : super(key: key);
 
   @override
   _EunBusinessListViewState createState() => _EunBusinessListViewState();
@@ -21,6 +22,8 @@ class _EunBusinessListViewState extends State<EunBusinessListView> {
   String? paymentStatus;
   List<Business> _businessList = [];
   LoanController _loanController = LoanController();
+  final BusinessController _Bcontroller = BusinessController();
+  late Business business;
 
   final _nameController = TextEditingController();
   final _addressController = TextEditingController();
@@ -70,49 +73,18 @@ class _EunBusinessListViewState extends State<EunBusinessListView> {
 
   String _status = 'pending';
 
+  Future<void> getData(String businessId) async {
+    business = await _Bcontroller.getBusiness(businessId);
+    print(business.fundAmount);
+  }
+
   @override
   void initState() {
     super.initState();
     _loanAmountController = TextEditingController(text: _number.toString());
     paymentStatus = "Not Paid";
-    _userId = widget.business.userId;
-    _name = widget.business.name;
-    _mobile = widget.business.mobile;
-    _city = widget.business.city;
-    _country = widget.business.country;
-    _professionalExperience =
-        List<String>.from(widget.business.professionalExperience);
-    _entrepreneurshipExperience =
-        List<String>.from(widget.business.entrepreneurshipExperience);
-    _education = List<String>.from(widget.business.education);
-    _industryCertifications =
-        List<String>.from(widget.business.industryCertifications);
-    _industryCertifications =
-        List<String>.from(widget.business.industryCertifications);
-    _awardsAchievements = List<String>.from(widget.business.awardsAchievements);
-    _trackRecord = List<String>.from(widget.business.trackRecord);
-    _email = widget.business.email;
 
-    _businessId = widget.business.id;
-    _businessName = widget.business.businessName;
-    _businessLocation = widget.business.businessLocation;
-    _executiveSummary = widget.business.executiveSummary;
-    _companyDescription = widget.business.companyDescription;
-    _businessModel = widget.business.businessModel;
-    _valueProposition = widget.business.valueProposition;
-    _productOrServiceOffering = widget.business.productOrServiceOffering;
-    _fundingNeeds = widget.business.fundingNeeds;
 
-    _minimumInvestmentAmount = widget.business.minimumInvestmentAmount;
-    _maximumInvestmentAmount = widget.business.maximumInvestmentAmount;
-    _fundAmount = widget.business.fundAmount;
-    _fundAmount = widget.business.fundAmount;
-    _fundPurpose = widget.business.fundPurpose;
-    _timeline = widget.business.timeline;
-    _fundingSources = widget.business.fundingSources;
-    _investmentTerms = widget.business.investmentTerms;
-    _investorBenefits = widget.business.investorBenefits;
-    _riskFactors = widget.business.riskFactors;
   }
 
   void _increment() {
@@ -135,6 +107,7 @@ class _EunBusinessListViewState extends State<EunBusinessListView> {
     try {
       await _loanController.addLoan(
           businessId:_businessId,
+          businessName:_businessName,
           loanAmount: _loanAmountController.text,
           loanDescription: _loanDescriptionController.text,
           loanId: '',
@@ -156,124 +129,30 @@ class _EunBusinessListViewState extends State<EunBusinessListView> {
     }
   }
 
-  void _showGetLoanDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Get a Loan'),
-          content: SingleChildScrollView(
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SizedBox(height: 8),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Column(
-                      children: [
-                        Text(
-                          'Loan Amount',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18.0,
-                          ),
-                        ),
-                        SizedBox(height: 8.0),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            IconButton(
-                              icon: Icon(Icons.remove),
-                              onPressed: _decrement,
-                            ),
-                            SizedBox(width: 16.0),
-                            Expanded(
-                              child: TextFormField(
-                                controller: _loanAmountController,
-                                keyboardType: TextInputType.number,
-                                textAlign: TextAlign.center,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  contentPadding:
-                                      EdgeInsets.symmetric(vertical: 8.0),
-                                ),
-                                onChanged: (value) {
-                                  setState(() {
-                                    _number = int.tryParse(value) ?? 0;
-                                  });
-                                },
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter a loan amount.';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                            SizedBox(width: 16.0),
-                            IconButton(
-                              icon: Icon(Icons.add),
-                              onPressed: _increment,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 16.0),
-                  TextFormField(
-                    controller: _loanDescriptionController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Loan Description',
-                    ),
-                    maxLines: 4,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter a loan description.';
-                      }
-                      return null;
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('Cancel'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  print(_userId);
-                  print(_businessId);
-                  print(_loanAmountController.text);
-                  print(_loanDescriptionController.text);
-                  print(_status);
-                  _addLoanValues();
-                  Navigator.of(context).pop();
-                }
-              },
-              child: Text('Submit'),
-            ),
-          ],
-        );
-      },
-    );
-  }
 
-  void _showEunDetailsDialog(BuildContext context, Business business) {
+  Future<void> _showEunDetailsDialog(BuildContext context, Loan loan) async {
     GlobalKey _imageKey = GlobalKey();
-
+    await getData(loan.businessId);
     showDialog(
       context: context,
       builder: (BuildContext context) {
+        String name = business.name;
+        String mobile = business.mobile;
+        String city = business.city;
+        String country = business.country;
+        List<String> professionalExperience = business.professionalExperience;
+        List<String> entrepreneurshipExperience = business.entrepreneurshipExperience;
+        List<String> education = business.education;
+        List<String> industryCertifications = business.industryCertifications;
+        List<String> awardsAchievements = business.awardsAchievements;
+        List<String> trackRecord = business.trackRecord;
+        String email = business.email;
+        String facebook = business.facebook;
+        String twitter = business.twitter;
+        String instagram = business.instagram;
+        String linkedin = business.linkedin;
+        String Userwebsite = business.Userwebsite;
+        String userImageDownloadUrl =business.UserImgUrl;
         return AlertDialog(
           title: Text('Entrepreneur Information'),
           content: SingleChildScrollView(
@@ -298,12 +177,12 @@ class _EunBusinessListViewState extends State<EunBusinessListView> {
                       image: DecorationImage(
                           fit: BoxFit.cover,
                           image: NetworkImage(
-                            (widget.business.UserImgUrl),
+                            (userImageDownloadUrl),
                           ))),
                 ),
                 SizedBox(height: 8),
                 Text(
-                  _name,
+                  name,
                   style: ralewayStyle.copyWith(
                     fontSize: 16.0,
                     color: AppColors.textColor,
@@ -317,7 +196,7 @@ class _EunBusinessListViewState extends State<EunBusinessListView> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Mobile : ' + _mobile,
+                        'Mobile : ' + mobile,
                         textAlign: TextAlign.justify,
                         style: ralewayStyle.copyWith(
                           fontSize: 16.0,
@@ -327,7 +206,7 @@ class _EunBusinessListViewState extends State<EunBusinessListView> {
                       ),
                       SizedBox(height: 20),
                       Text(
-                        'City : ' + _city,
+                        'City : ' + city,
                         textAlign: TextAlign.justify,
                         style: ralewayStyle.copyWith(
                           fontSize: 16.0,
@@ -337,7 +216,7 @@ class _EunBusinessListViewState extends State<EunBusinessListView> {
                       ),
                       SizedBox(height: 20),
                       Text(
-                        'Country  : ' + _country,
+                        'Country  : ' + country,
                         textAlign: TextAlign.justify,
                         style: ralewayStyle.copyWith(
                           fontSize: 16.0,
@@ -347,7 +226,7 @@ class _EunBusinessListViewState extends State<EunBusinessListView> {
                       ),
                       SizedBox(height: 20),
                       Text(
-                        'Email  : ' + _email,
+                        'Email  : ' + email,
                         textAlign: TextAlign.justify,
                         style: ralewayStyle.copyWith(
                           fontSize: 16.0,
@@ -368,7 +247,7 @@ class _EunBusinessListViewState extends State<EunBusinessListView> {
                       Divider(thickness: 2),
                       SizedBox(height: 8),
                       Column(
-                        children: _professionalExperience
+                        children: professionalExperience
                             .map(
                               (experience) => Column(
                                 children: [
@@ -400,7 +279,7 @@ class _EunBusinessListViewState extends State<EunBusinessListView> {
                       Divider(thickness: 2),
                       SizedBox(height: 8),
                       Column(
-                        children: _entrepreneurshipExperience
+                        children: entrepreneurshipExperience
                             .map(
                               (entrepreneurshipExperience) => Column(
                                 children: [
@@ -432,7 +311,7 @@ class _EunBusinessListViewState extends State<EunBusinessListView> {
                       Divider(thickness: 2),
                       SizedBox(height: 8),
                       Column(
-                        children: _education
+                        children: education
                             .map(
                               (education) => Column(
                                 children: [
@@ -464,7 +343,7 @@ class _EunBusinessListViewState extends State<EunBusinessListView> {
                       Divider(thickness: 2),
                       SizedBox(height: 8),
                       Column(
-                        children: _industryCertifications
+                        children: industryCertifications
                             .map(
                               (industryCertifications) => Column(
                                 children: [
@@ -496,7 +375,7 @@ class _EunBusinessListViewState extends State<EunBusinessListView> {
                       Divider(thickness: 2),
                       SizedBox(height: 8),
                       Column(
-                        children: _awardsAchievements
+                        children: awardsAchievements
                             .map(
                               (awardsAchievements) => Column(
                                 children: [
@@ -528,7 +407,7 @@ class _EunBusinessListViewState extends State<EunBusinessListView> {
                       Divider(thickness: 2),
                       SizedBox(height: 8),
                       Column(
-                        children: _trackRecord
+                        children: trackRecord
                             .map(
                               (trackRecord) => Column(
                                 children: [
@@ -563,7 +442,7 @@ class _EunBusinessListViewState extends State<EunBusinessListView> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.mainBlueColor,
-        title: Text('User Design Page'),
+        title: Text('Business Information'),
       ),
       body: ListView(
         padding: EdgeInsets.all(16),
@@ -602,12 +481,12 @@ class _EunBusinessListViewState extends State<EunBusinessListView> {
           SizedBox(height: 16),
           Stack(
             children: [
-              Image.network(
-                (widget.business.businessImgUrl),
-                height: 175,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
+              // Image.network(
+              //   (widget.business.businessImgUrl),
+              //   height: 175,
+              //   width: double.infinity,
+              //   fit: BoxFit.cover,
+              // ),
               Positioned(
                 bottom: 10,
                 right: 10,
@@ -629,17 +508,17 @@ class _EunBusinessListViewState extends State<EunBusinessListView> {
                   child: Center(
                     child: GestureDetector(
                       onTap: () {
-                        _showEunDetailsDialog(context, widget.business);
+                        //_showEunDetailsDialog(context,loan);
                       },
                       child: Container(
                         height: 40,
                         width: 40,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          image: DecorationImage(
-                            image: NetworkImage(widget.business.UserImgUrl),
-                            fit: BoxFit.cover,
-                          ),
+                          // image: DecorationImage(
+                          //   image: NetworkImage(widget.business.UserImgUrl),
+                          //   fit: BoxFit.cover,
+                          // ),
                         ),
                       ),
                     ),
@@ -954,7 +833,7 @@ class _EunBusinessListViewState extends State<EunBusinessListView> {
                           Expanded(
                             child: ElevatedButton(
                               onPressed: () {
-                                _showGetLoanDialog(context);
+                                //_showGetLoanDialog(context);
                               },
                               style: ElevatedButton.styleFrom(
                                 primary: AppColors.mainBlueColor,

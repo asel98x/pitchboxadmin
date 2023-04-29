@@ -31,6 +31,14 @@ class _EntrepreneurTabState extends State<EntrepreneurTab> {
     _loadInvestorList();
   }
 
+  void clear(){
+    _nameController.text = '';
+    _emailController.text = '';
+    _passwordController.text = '';
+    _passwordController.text = '';
+    _confirmPasswordController.text = '';
+  }
+
   Future<void> _loadInvestorList() async {
     List<MainUser> entrepreneurListList = await _controller.getEntrepreneurList();
     setState(() {
@@ -236,7 +244,11 @@ class _EntrepreneurTabState extends State<EntrepreneurTab> {
         // Call the delete method on the controller to delete the industry
         _controller.deleteEntrepreneur(mainUser.userId);
         // Refresh the list after deletion
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('User information updated')),
+        );
         _handleRefresh();
+
       }
     });
   }

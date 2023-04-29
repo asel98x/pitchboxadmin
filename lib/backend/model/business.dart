@@ -199,4 +199,5 @@ class Business {
       'status': status,
     };
   }
+
 }

@@ -31,6 +31,7 @@ class _StartupTabState extends State<StartupTab> {
     });
   }
 
+
   void _filterBusinessList(String query) {
     List<Business> filterBusinessList = _businessList
         .where((business) =>
@@ -70,6 +71,13 @@ class _StartupTabState extends State<StartupTab> {
         _controller.deleteNewBusiness(business.id);
         // Refresh the list after deletion
         _handleRefresh();
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Business idea Deleted successfully!'),
+          ),
+        );
+        Navigator.of(context).pop();
       }
     });
   }

@@ -188,7 +188,7 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
     late String valueProposition= _valueProposition.text;
     late String productOrServiceOffering= _productOrServiceOffering.text;
     late String fundingNeeds= _fundingNeeds.text;
-    late String website2 = _phoneController.text;
+    late String website2 = _website2.text;
     File? Bimage = _bimageFile;
 
     //----------------------Funding Requirments------------------------------------------//
@@ -210,6 +210,7 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
     late String investorLocation = _geographicLocation.text;
     String? selectedInvestmentExperience=  _selectedInvestmentExperience;
     late List<String> industryFocus =  _industryFocus;
+    String? selectedstatus=  _selectedstatus;
 
 
 
@@ -263,7 +264,7 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
             investmentStage: selectedInvestmentExperience!,
             industryFocus: industryFocus,
             investorLocation: investorLocation,
-            status: 'Pending',
+            status: selectedstatus!,
             street: '',
             state: '',
             zipCode: '',
@@ -302,7 +303,7 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
           children: [
             const SizedBox(height: 8,),
             TextFormField(
-              controller: _fullNameController,
+              controller: _userIdController,
               decoration: InputDecoration(
                 labelText: 'User ID',
                 border: OutlineInputBorder(

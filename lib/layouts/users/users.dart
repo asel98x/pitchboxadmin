@@ -37,6 +37,12 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
   final _confirmPasswordController = TextEditingController();
 
 
+  void clear(){
+    _nameController.text = '';
+    _emailController.text = '';
+    _passwordController.text = '';
+    _confirmPasswordController.text = '';
+  }
 
 
   void userRegister(String email, String password) async {
@@ -105,6 +111,7 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
           .doc(user.uid) // Use user.uid here as well
           .set(userModel.toMap());
       Fluttertoast.showToast(msg: "Entrepreneur Account created successfully");
+      clear();
 
     } else if (controller.index == 1) {
       userType = 'investor';
@@ -120,7 +127,7 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
           .doc(user.uid) // Use user.uid here as well
           .set(userModel.toMap());
       Fluttertoast.showToast(msg: "Investor Account created successfully");
-
+      clear();
     }
     else if (controller.index == 2) {
       userType = 'admin';
@@ -136,6 +143,7 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
           .doc(user.uid) // Use user.uid here as well
           .set(userModel.toMap());
       Fluttertoast.showToast(msg: "Admin Account created successfully");
+      clear();
     }
   }
 

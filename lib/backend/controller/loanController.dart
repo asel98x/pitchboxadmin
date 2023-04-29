@@ -11,6 +11,7 @@ class LoanController {
     required String loanId,
     required String userId,
     required String businessId,
+    required String businessName,
     required String loanAmount,
     required String loanDescription,
     required String status,
@@ -20,6 +21,7 @@ class LoanController {
         loanId: loanId,
         userId: userId,
         businessId: businessId,
+      businessName: businessName,
         loanAmount: loanAmount,
         loanDescription: loanDescription,
         status: status,
@@ -34,7 +36,14 @@ class LoanController {
     return LoanList;
   }
 
-  Future<void> updateLoan(String loanId, String userId, String businessId, String loanAmount, String loanDescription, String status) async {
+  Future<void> updateLoan(
+      String loanId,
+      String userId,
+      String businessId,
+      String businessName,
+      String loanAmount,
+      String loanDescription,
+      String status) async {
     try {
       if (loanId == null || loanId.isEmpty) {
         debugPrint('Error updating loan: loanId is null or empty');
@@ -45,6 +54,7 @@ class LoanController {
           loanId: loanId,
           userId: userId,
           businessId: businessId,
+          businessName: businessName,
           loanAmount: loanAmount,
           loanDescription: loanDescription,
           status: status);

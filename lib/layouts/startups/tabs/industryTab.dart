@@ -149,6 +149,11 @@ class _IndustryTabState extends State<IndustryTab> {
                   await _industryController.updateIndustry(id, name, img,industry.imgUrl);
                   _imageFile = null;
                   print('object');
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Industry updated successfully!'),
+                    ),
+                  );
                 },
                 child: Text('Update'),
               ),
@@ -188,6 +193,11 @@ class _IndustryTabState extends State<IndustryTab> {
         _industryController.deleteIndustry(industry.id);
         // Refresh the list after deletion
         _handleRefresh();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Industry deleted successfully!'),
+          ),
+        );
       }
     });
   }

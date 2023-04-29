@@ -154,71 +154,79 @@ class BusinessController {
   }
 
   Future<void> updateNewBusiness(
-      String businessId,
-      String userId,
-      String name,
-      String email,
-      String mobile,
-      String street,
-      String city,
-      String state,
-      String zipCode,
-      String country,
-      String industry,
-      String linkedin,
-      String twitter,
-      String facebook,
-      String instagram,
-      String Userwebsite,
-      File UserImgUrl,
-      String provider,
-      String pass,
-      List<String> professionalExperience,
-      List<String> entrepreneurshipExperience,
-      List<String> education,
-      List<String> industryCertifications,
-      List<String> awardsAchievements,
-      List<String> trackRecord,
-      String businessIndustry,
-      String businessName,
-      String businessLocation,
-      String companyDescription,
-      String website,
-      String executiveSummary,
-      String businessModel,
-      String valueProposition,
-      String productOrServiceOffering,
-      String fundingNeeds,
-      File businessImgUrl,
-      String fundAmount,
-      String avaiableFundAmount,
-      String fundPurpose,
-      String timeline,
-      String fundingSources,
-      String investmentTerms,
-      String investorBenefits,
-      String riskFactors,
-      String minimumInvestmentAmount,
-      String maximumInvestmentAmount,
-      String investmentStage,
-      List<String> industryFocus,
-      String investorLocation,
-      String investmentGoal,
-      String investmentCriteria,
-      String status, File? image,String userImageDownloadUrl,String businessImageDownloadUrl) async {
+      {required String id,
+        required String userId,
+        required String name,
+        required String email,
+        required String mobile,
+        required String street,
+        required String city,
+        required String state,
+        required String zipCode,
+        required String country,
+        required String industry,
+        required String linkedin,
+        required String twitter,
+        required String facebook,
+        required String instagram,
+        required String Userwebsite,
+        required File? UserImgUrl,
+        required String provider,
+        required String pass,
+        required List<String> professionalExperience,
+        required List<String> entrepreneurshipExperience,
+        required List<String> education,
+        required List<String> industryCertifications,
+        required List<String> awardsAchievements,
+        required List<String> trackRecord,
+        required String businessIndustry,
+        required String businessName,
+        required String businessLocation,
+        required String companyDescription,
+        required String website,
+        required String executiveSummary,
+        required String businessModel,
+        required String valueProposition,
+        required String productOrServiceOffering,
+        required String fundingNeeds,
+        required File? businessImgUrl,
+        required String fundAmount,
+        required String avaiableFundAmount,
+        required String fundPurpose,
+        required String timeline,
+        required String fundingSources,
+        required String investmentTerms,
+        required String investorBenefits,
+        required String riskFactors,
+        required String minimumInvestmentAmount,
+        required String maximumInvestmentAmount,
+        required String investmentStage,
+        required List<String> industryFocus,
+        required String investorLocation,
+        required String investmentGoal,
+        required String investmentCriteria,
+        required String status,
+        required File? image,
+        required String userImageDownloadUrl,
+        required String businessImageDownloadUrl}) async {
     try{
-      if (image != null) {
+      if (UserImgUrl != null && businessImgUrl != null) {
+        // update user image to Firebase Storage
+        final userImageRef = FirebaseStorage.instance
+            .ref('user_images/${DateTime.now().millisecondsSinceEpoch}');
+        final userImageUploadTask = userImageRef.putFile(UserImgUrl!);
+        final userImageSnapshot = await userImageUploadTask;
+        final userImageDownloadUrl2 = await userImageSnapshot.ref.getDownloadURL();
 
-
-        final storageRef = FirebaseStorage.instance
-            .ref()
-            .child('business_images/${DateTime.now().millisecondsSinceEpoch}');
-        final uploadTask = storageRef.putFile(image);
-        final snapshot = await uploadTask.whenComplete(() {});
-        userImageDownloadUrl = await snapshot.ref.getDownloadURL();
+        // update business image to Firebase Storage
+        final businessImageRef = FirebaseStorage.instance
+            .ref('business_images/${DateTime.now().millisecondsSinceEpoch}');
+        final businessImageUploadTask = businessImageRef.putFile(businessImgUrl!);
+        final businessImageSnapshot = await businessImageUploadTask;
+        final businessImageDownloadUrl2 = await businessImageSnapshot.ref.getDownloadURL();
 
         Business business = Business(
-          id: '',
+          id: id,
           userId: userId ,
           name: name,
           email: email,
@@ -230,7 +238,7 @@ class BusinessController {
           facebook: facebook,
           instagram: instagram,
           Userwebsite: Userwebsite,
-          UserImgUrl: userImageDownloadUrl,
+          UserImgUrl: userImageDownloadUrl2,
           professionalExperience: professionalExperience,
           entrepreneurshipExperience: entrepreneurshipExperience,
           education: education,
@@ -249,7 +257,7 @@ class BusinessController {
           valueProposition: valueProposition,
           productOrServiceOffering: productOrServiceOffering,
           fundingNeeds: fundingNeeds,
-          businessImgUrl: businessImageDownloadUrl,
+          businessImgUrl: businessImageDownloadUrl2,
 
           fundAmount: fundAmount,
           avaiableFundAmount:avaiableFundAmount,
@@ -271,7 +279,7 @@ class BusinessController {
 
       }else{
         Business business = Business(
-          id: '',
+          id: id,
           userId: userId ,
           name: name,
           email: email,
@@ -331,4 +339,10 @@ class BusinessController {
   Future<void> deleteNewBusiness(String businessId) async {
     await _BusinessService.deleteNewBusiness(businessId);
   }
+
+  Future<Business> getBusiness(String businessId) async {
+    return await _BusinessService.getBusiness(businessId);
+  }
+
+
 }

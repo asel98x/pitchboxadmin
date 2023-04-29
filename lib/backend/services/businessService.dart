@@ -46,6 +46,7 @@ class BusinessService implements BusinessInterface{
       'businessImgUrl': business.businessImgUrl,
 
       'fundAmount': business.fundAmount,
+      'avaiableFundAmount': business.avaiableFundAmount,
       'fundPurpose': business.fundPurpose,
       'timeline': business.timeline,
       'fundingSources': business.fundingSources,
@@ -152,8 +153,23 @@ class BusinessService implements BusinessInterface{
   @override
   Future<void> updateNewBusiness(Business business) async{
     await _firestore
-        .collection('industries')
+        .collection('startup')
         .doc(business.id)
+        .update(business.toMap());
+  }
+
+  @override
+  Future<Business> getBusiness(String businessID) async {
+    DocumentSnapshot documentSnapshot = await _firestore.collection('startup').doc(businessID).get();
+    Business business = Business.fromSnapshot(documentSnapshot);
+    return business;
+  }
+
+  @override
+  Future<void> updateBusinessLoan(Business business) async {
+    await _firestore
+        .collection('startup')
+        .doc(business.businessId)
         .update(business.toMap());
   }
 }

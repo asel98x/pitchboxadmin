@@ -44,6 +44,10 @@ class _BusinessPageState extends State<BusinessPage> with SingleTickerProviderSt
     super.dispose();
   }
 
+  void clear(){
+    _nameController.text = "";
+  }
+
   void _showAddDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -111,6 +115,7 @@ class _BusinessPageState extends State<BusinessPage> with SingleTickerProviderSt
                           _isUploading = true;
                         });
                         await IndustryController().addIndustry(name, image, context);
+
                         setState(() {
                           _isUploading = false;
                         });
@@ -119,6 +124,12 @@ class _BusinessPageState extends State<BusinessPage> with SingleTickerProviderSt
                         setState(() {
                           _imageFile = null;
                         });
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Industry added successfully!'),
+                          ),
+                        );
+                        clear();
                       },
                       child: Text('Add'),
                     ),

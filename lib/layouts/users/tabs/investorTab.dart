@@ -235,6 +235,9 @@ class _InvestorTabState extends State<InvestorTab> {
       if (confirmed == true) {
         // Call the delete method on the controller to delete the industry
         _controller.deleteInvestor(mainUser.userId);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('User deleted!')),
+        );
         // Refresh the list after deletion
         _handleRefresh();
       }
