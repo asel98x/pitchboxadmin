@@ -148,15 +148,15 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
     return GestureDetector(
       onTap: () {
 
-        if (title == "Investor Profile Manage") {
+        if (title == "Comming Soon") {
           //Navigator.push(context, MaterialPageRoute(builder: (_) => InvestorCheckout()));
-        } else if (title == "Signup Screen") {
+        } else if (title == "Comming Soon") {
           //Navigator.push(context, MaterialPageRoute(builder: (_) => SignupScreen()));
-        } else if (title == "Social") {
+        } else if (title == "Comming Soon") {
 
-        } else if (title == "Language") {
+        } else if (title == "Comming Soon") {
 
-        } else if (title == "Privacy and security") {
+        } else if (title == "Comming Soon") {
 
         }
       },

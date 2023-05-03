@@ -6,6 +6,7 @@ abstract class UserInterface {
   void addInvestor(MainUser mainUser);
   void addEntrepreneur(MainUser MainUser);
   void addAdmin(MainUser MainUser);
+  Future<List<MainUser>> getUserDetails(String id);
 
   Future<List<MainUser>> getEntrepreneurList();
   Future<List<MainUser>> getInvestorList();

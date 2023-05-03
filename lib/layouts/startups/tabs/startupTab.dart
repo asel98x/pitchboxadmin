@@ -121,7 +121,7 @@ class _StartupTabState extends State<StartupTab> {
                       );
                     },
                     onLongPress: () {
-                      _showDeleteConfirmationDialog(context, business);
+                      _showDeleteConfirmationDialog(context,business);
                     },
                     child: Card(
                       margin: EdgeInsets.all(16.0),
@@ -135,14 +135,14 @@ class _StartupTabState extends State<StartupTab> {
                                 Padding(
                                   padding: EdgeInsets.all(8.0),
                                   child: Image.network(
-                                      business.businessImgUrl,
+                                    business.businessImgUrl,
                                     fit: BoxFit.cover,
-                                    height: 125.0,
+                                    height: 170.0,
                                   ),
                                 ),
                                 Positioned(
-                                  bottom: 0.0,
-                                  right: 0.0,
+                                  bottom: 20.0,
+                                  right: 20.0,
                                   child: Container(
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
@@ -171,20 +171,10 @@ class _StartupTabState extends State<StartupTab> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.all(16.0),
+                            padding: EdgeInsets.all(8.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  style: ralewayStyle.copyWith(
-                                    fontSize: 20,
-                                    color: AppColors.greyColor,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                  business.businessName,
-                                  textAlign: TextAlign.justify,
-                                ),
-                                SizedBox(height: 8.0),
                                 Text(
                                   business.businessName,
                                   style: ralewayStyle.copyWith(
@@ -194,7 +184,7 @@ class _StartupTabState extends State<StartupTab> {
                                   ),
                                   textAlign: TextAlign.justify,
                                 ),
-                                SizedBox(height: 16.0),
+                                SizedBox(height: 8.0),
                                 Text(
                                   business.executiveSummary,
                                   style: ralewayStyle.copyWith(
@@ -204,7 +194,7 @@ class _StartupTabState extends State<StartupTab> {
                                   ),
                                   textAlign: TextAlign.justify,
                                 ),
-                                SizedBox(height: 16.0),
+                                SizedBox(height: 8.0),
                                 Row(
                                   mainAxisAlignment:
                                   MainAxisAlignment.spaceBetween,
@@ -212,31 +202,32 @@ class _StartupTabState extends State<StartupTab> {
                                     Text(
                                       '\$'+business.fundAmount,
                                       style: ralewayStyle.copyWith(
-                                        fontSize: 22.0,
+                                        fontSize: 18.0,
                                         color: AppColors.blueDarkColor,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    Text(
-                                      'Text 1',
-                                      style: TextStyle(
-                                        fontSize: 16.0,
-                                      ),
-                                    ),
-                                    Text(
-                                      'Text 2',
-                                      style: TextStyle(
-                                        fontSize: 16.0,
-                                      ),
-                                    ),
-                                    Text(
-                                      'Text 3',
-                                      style: TextStyle(
-                                        fontSize: 16.0,
-                                      ),
-                                    ),
+                                    Wrap(
+                                      children: business.industryFocus.map((industry) => Container(
+                                        margin: EdgeInsets.only(right: 10),
+                                        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                        decoration: BoxDecoration(
+                                          color: AppColors.lightBlueColor,
+                                          borderRadius: BorderRadius.circular(4),
+                                        ),
+                                        child: Text(
+                                          industry,
+                                          style: ralewayStyle.copyWith(
+                                            fontSize: 16.0,
+                                            color: AppColors.blueDarkColor,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      )).toList(),
+                                    )
                                   ],
                                 ),
+                                SizedBox(height: 8.0),
                               ],
                             ),
                           ),

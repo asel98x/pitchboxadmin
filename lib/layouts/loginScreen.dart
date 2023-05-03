@@ -212,21 +212,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         SizedBox(height: height * 0.03),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: TextButton(
-                            onPressed: ()async{
 
-                            },
-                            child: Text('Forgot Password?',
-                              style: ralewayStyle.copyWith(
-                                fontSize: 12.0,
-                                color: AppColors.mainBlueColor,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                        ),
 
                         SizedBox(height: height * 0.05),
                         Center(

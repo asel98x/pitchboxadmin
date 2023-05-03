@@ -147,4 +147,7 @@ class UserController {
     await _userService.deleteInvestor(userId);
   }
 
+  Future<List<MainUser>> getUserDetails(String id) async {
+    return await _userService.getUserDetails(id);
+  }
 }

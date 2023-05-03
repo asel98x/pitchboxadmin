@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pitchboxadmin/appIcons.dart';
 import 'package:pitchboxadmin/appcolors.dart';
 import 'package:pitchboxadmin/appstyles.dart';
 import 'package:pitchboxadmin/layouts/profile/profileSettings.dart';
@@ -79,9 +80,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           shape: BoxShape.circle,
                           image: DecorationImage(
                               fit: BoxFit.cover,
-                              image: NetworkImage(
-                                "",//https://images.pexels.com/photos/3307758/pexels-photo-3307758.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250
-                              ))),
+                            image: AssetImage(AppIcons.emptyUser),
+                          )),
                     ),
                     Positioned(
                         bottom: 0,
@@ -108,37 +108,10 @@ class _ProfilePageState extends State<ProfilePage> {
               SizedBox(
                 height: 35,
               ),
-              buildTextField("Full Name", "asel algama", false),
-              buildTextField("E-mail", "asel@gmail.com", false),
-              buildTextField("Password", "********", true),
-              buildTextField("Provider", "Google", false),
+              buildTextField("User Name", "test name", false),
+              buildTextField("Email", "test@gmail.com", false),
+              buildTextField("User Type", "admin", false),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      primary: AppColors.mainBlueColor,
-                      padding: EdgeInsets.symmetric(horizontal: 130),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-
-                      ),
-                    ),
-                    child: Text(
-                      "SAVE",
-                      style: TextStyle(
-                        fontSize: 14,
-                        letterSpacing: 2.2,
-                        color: Colors.white,
-                      ),
-                    ),
-                  )
-
-                ],
-              )
             ],
           ),
         ),

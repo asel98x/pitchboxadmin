@@ -110,7 +110,10 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
           .collection("users")
           .doc(user.uid) // Use user.uid here as well
           .set(userModel.toMap());
-      Fluttertoast.showToast(msg: "Entrepreneur Account created successfully");
+      //Fluttertoast.showToast(msg: "Entrepreneur Account created successfully");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Entrepreneur Account created successfully!')),
+      );
       clear();
 
     } else if (controller.index == 1) {
@@ -126,7 +129,10 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
           .collection("users")
           .doc(user.uid) // Use user.uid here as well
           .set(userModel.toMap());
-      Fluttertoast.showToast(msg: "Investor Account created successfully");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Investor Account created successfully!')),
+      );
+      //Fluttertoast.showToast(msg: "Investor Account created successfully");
       clear();
     }
     else if (controller.index == 2) {
@@ -142,7 +148,10 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
           .collection("users")
           .doc(user.uid) // Use user.uid here as well
           .set(userModel.toMap());
-      Fluttertoast.showToast(msg: "Admin Account created successfully");
+      //Fluttertoast.showToast(msg: "Admin Account created successfully");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Admin Account created successfully!')),
+      );
       clear();
     }
   }

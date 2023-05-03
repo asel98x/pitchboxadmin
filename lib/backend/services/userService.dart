@@ -195,6 +195,17 @@ class UserService implements UserInterface {
         .update(mainUser.toMap());
   }
 
-  
+  @override
+  Future<List<MainUser>> getUserDetails(String id) async {
+    QuerySnapshot querySnapshot = await _firestore
+        .collection('users')
+        .where('userId', isEqualTo: id)
+        .get();
+    List<MainUser> investors = [];
+    querySnapshot.docs.forEach((doc) {
+      investors.add(MainUser.fromSnapshot(doc));
+    });
+    return investors;
+  }
 
 }
