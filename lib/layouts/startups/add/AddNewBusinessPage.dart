@@ -10,6 +10,7 @@ import 'package:pitchboxadmin/backend/controller/IndustryController.dart';
 import 'package:pitchboxadmin/backend/controller/businessController.dart';
 import 'package:pitchboxadmin/backend/model/business.dart';
 import 'package:pitchboxadmin/backend/services/businessService.dart';
+import 'package:pitchboxadmin/layouts/dashboard.dart';
 
 
 class AddBusinessPage extends StatefulWidget {
@@ -36,47 +37,55 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
   //----------------------Personal Information------------------------------------------//
   //====================================================================================//
   final _userIdController = TextEditingController();
-  final _fullNameController = TextEditingController();
-  final _phoneController = TextEditingController();
-  final _cityController = TextEditingController();
-  final _countryController = TextEditingController();
+  final _fullNameController = TextEditingController(text: 'Asel Algama');
+  final _phoneController = TextEditingController(text: '+94765432014');
+  final _cityController = TextEditingController(text: 'Los Angeles');
+  final _countryController = TextEditingController(text: 'America');
   final _industryController = IndustryController();
   final _professionalExperienceController = <TextEditingController>[
-    TextEditingController()
+    TextEditingController(text: 'Worked as a Senior Manager at ABC Corporation for 5 years'),
+    TextEditingController(text: 'Managed a team of 10 employees at XYZ Company for 3 years'),
   ];
   final _entrepreneurshipExperienceController = <TextEditingController>[
-    TextEditingController()
+    TextEditingController(text: 'Co-founded a tech startup that was acquired by a larger company'),
+    TextEditingController(text: 'Started a successful consulting business that generated six-figure revenue in the first year'),
   ];
-  final _educationController = <TextEditingController>[TextEditingController()];
+  final _educationController = <TextEditingController>[
+    TextEditingController(text: 'Bachelors degree in Business Administration from XYZ University'),
+    TextEditingController(text: 'Masters degree in Finance from ABC University'),
+  ];
   final _industryCertificationsController = <TextEditingController>[
-    TextEditingController()
+    TextEditingController(text: 'Certified Public Accountant (CPA)'),
+    TextEditingController(text: 'Chartered Financial Analyst (CFA)'),
   ];
   final _awardsAchievementsController = <TextEditingController>[
-    TextEditingController()
+    TextEditingController(text: 'Named "Top 40 under 40" by Forbes Magazine'),
+    TextEditingController(text: 'Received "Entrepreneur of the Year" award from the Chamber of Commerce'),
   ];
   final _trackRecordController = <TextEditingController>[
-    TextEditingController()
+    TextEditingController(text: 'Successfully invested in multiple startups that have gone public'),
+    TextEditingController(text: 'Has a portfolio of real estate properties that generate passive income'),
   ];
-  final _emailController = TextEditingController();
-  final _facebookController = TextEditingController();
-  final _twitterController = TextEditingController();
-  final _instagramController = TextEditingController();
-  final _linkedinController = TextEditingController();
-  final _websiteController = TextEditingController();
+  final _emailController = TextEditingController(text: 'vinjith98@gmail.com');
+  final _facebookController = TextEditingController(text: 'www.facebook.com');
+  final _twitterController = TextEditingController(text: 'www.twitter.com');
+  final _instagramController = TextEditingController(text: 'www.instagram.com');
+  final _linkedinController = TextEditingController(text: 'www.linkedin.com');
+  final _websiteController = TextEditingController(text: 'www.pitchbox.com');
 
   //====================================================================================//
   //----------------------Business Information------------------------------------------//
   //====================================================================================//
-  final _businessName = TextEditingController();
-  final _businessIndustry = TextEditingController();
-  final _businessLocation = TextEditingController();
-  final _companyDescription = TextEditingController();
-  final _website2 = TextEditingController();
-  final _executiveSummary = TextEditingController();
-  final _businessModel = TextEditingController();
-  final _valueProposition = TextEditingController();
-  final _productOrServiceOffering = TextEditingController();
-  final _fundingNeeds = TextEditingController();
+  final _businessName = TextEditingController(text: 'Pitchbox');
+  final _businessIndustry = TextEditingController(text: 'Investment');
+  final _businessLocation = TextEditingController(text: 'America');
+  final _companyDescription = TextEditingController(text: 'Our company is a mobile app development company that specializes in creating investment apps.');
+  final _website2 = TextEditingController(text: 'www.pitchbox.com');
+  final _executiveSummary = TextEditingController(text: 'Connecting entrepreneurs and investors for a better future.');
+  final _businessModel = TextEditingController(text: 'Our company will generate revenue by taking a percentage of the funding that is raised through our platform.');
+  final _valueProposition = TextEditingController(text: 'Our platform uses machine learning algorithms to match entrepreneurs and investors based on their needs and preferences. This ensures that entrepreneurs are connected with investors who are interested in their ideas, and investors are connected with entrepreneurs whose plans match with their own investment goals.');
+  final _productOrServiceOffering = TextEditingController(text: 'Our mobile app will allow entrepreneurs to create listings for their business ideas and seek funding from investors. Investors will be able to browse through these listings and get in touch with entrepreneurs whose plans match with their own investment goals.');
+  final _fundingNeeds = TextEditingController(text: 'We need \$500,000 in funding to develop our mobile app and launch it in the market.');
 
   //====================================================================================//
   //----------------------Business Team Information-------------------------------------//
@@ -92,23 +101,23 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
   //====================================================================================//
   //----------------------Funding Requirments------------------------------------------//
   //====================================================================================//
-  final _fundAmount = TextEditingController();
-  final _fundPurpose = TextEditingController();
-  final _timeline = TextEditingController();
-  final _fundingSources = TextEditingController();
-  final _investmentTerms = TextEditingController();
-  final _investorBenefits = TextEditingController();
-  final _riskFactors = TextEditingController();
+  final _fundAmount = TextEditingController(text: '500000');
+  final _fundPurpose = TextEditingController(text: 'Develop app prototype - 3 months; Launch beta version - 6 months; Launch full version - 9 months.');
+  final _timeline = TextEditingController(text: 'Develop app prototype - 3 months; Launch beta version - 6 months; Launch full version - 9 months.');
+  final _fundingSources = TextEditingController(text: 'We plan to get funding from angel investors and venture capitalists.');
+  final _investmentTerms = TextEditingController(text: 'We are offering equity in our company in exchange for funding.');
+  final _investorBenefits = TextEditingController(text: 'Investors will receive equity in our company based on the amount of funding they provide.');
+  final _riskFactors = TextEditingController(text: 'Our success depends on our ability to attract both entrepreneurs and investors to our platform. If we are unable to do so, our business may fail.');
 
   //====================================================================================//
   //----------------------Funding Requirments------------------------------------------//
   //====================================================================================//
-  final _minimumInvestmentAmount = TextEditingController();
-  final _maximumInvestmentAmount = TextEditingController();
+  final _minimumInvestmentAmount = TextEditingController(text: '1000');
+  final _maximumInvestmentAmount = TextEditingController(text: '10000');
   final List<String> _selectedInvestmentStage = ['seed', 'early-stage', 'growth-stage'];
   String? _selectedInvestmentExperience;
   List<String> _industryFocus = [];
-  final _geographicLocation = TextEditingController();
+  final _geographicLocation = TextEditingController(text: 'America');
   final List<String> _status = ['Pending', 'Accepted', 'Rejected'];
   String? _selectedstatus;
 
@@ -281,11 +290,14 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
           content: Text('Business idea added successfully!'),
         )
       );
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => Dashboard()),
+      );
 
     }catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Failed to add BUsiness idea'),
+          content: Text('Failed to add Business idea'),
         ),
       );
       print(e.toString());
